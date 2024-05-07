@@ -1,0 +1,16 @@
+Introduction
+As a group, we constantly run into the issue of finding people to play sports with. Despite the abundance of sports facilities on campus, we still find it hard to engage in these activities with our peers. Our web application will be designed to combat this problem. This app will allow users to effortlessly create and join groups looking for games in a variety of different sports, providing an easy way for users to find other people to play sports with and line up their schedules.  Our app will be called SportsMe.
+
+Detailed Description of Features + Functionalities
+The features of our app include:
+  Users are able to create and join different groups
+  Groups are able to be customized based on the sport, location, and number of people.
+  Filter posts based on requirements set by user
+  Users who create posts can add additional comments if desired
+  Add friends (users that you frequently play with)
+  Posts that are created by friends will be displayed at the top of the user's interface.
+  RSVP to scheduled events
+If users would like to continue playing with one another after their first meetup, they can RSVP to a scheduled event (daily, weekly, etc.).
+Automatically sends confirmation and reminders to users via email/text
+
+To address security issues with our app, users must create an account (username and password) when opening the app for the first time. Users will also be required to provide additional information such as their phone number, email, year, and gender.
