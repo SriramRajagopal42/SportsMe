@@ -3,7 +3,7 @@ import './LoginSignup.css'
 
 export const LoginSignup = () => {
   return (
-    <div>LoginSignup</div>
+    <div>Login Signup</div>
   )
 }
 
