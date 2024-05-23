@@ -1,0 +1,15 @@
+/* src/pages/HomePage.css */
+.homepage {
+    text-align: center;
+    margin-top: 50px;
+  }
+  
+  .homepage h1 {
+    font-size: 2.5em;
+    color: #333;
+  }
+  
+  .homepage p {
+    font-size: 1.2em;
+    color: #666;
+  }

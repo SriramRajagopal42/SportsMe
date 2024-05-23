@@ -1,5 +1,6 @@
 import React from 'react'
 import {useState} from 'react'
+import { useNavigate } from 'react-router-dom';
 import './LoginSignup.css'
 import password_icon from '../Assets/password.png'
 import user_icon from '../Assets/person.png'
@@ -12,6 +13,8 @@ export const LoginSignup = () => {
   const[password, setPassword] = useState("");
   const[email, setEmail] = useState("");
   const[status, setStatus] = useState("");
+  const navigate = useNavigate();
+  
   async function validateUser() {
     
     await axios.post('localhost/login', {
@@ -27,7 +30,7 @@ export const LoginSignup = () => {
     .then(response => {
       if(response['data']['success']) {
         setStatus("");
-        //navigate to main page
+        navigate('/home');
       }
       else {
         setStatus(response['data']['message']);
@@ -54,7 +57,7 @@ export const LoginSignup = () => {
     .then(response => {
       if(response['data']['success']) {
         setStatus("");
-        //navigate to main page
+        navigate('/home');
       }
       else {
         setStatus(response['data']['message']);
