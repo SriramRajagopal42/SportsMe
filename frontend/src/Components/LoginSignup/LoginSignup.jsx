@@ -14,7 +14,7 @@ export const LoginSignup = () => {
   const[status, setStatus] = useState("");
   async function validateUser() {
     
-    await axios.post('http://localhost:5000/login', {
+    await axios.post('localhost/login', {
       'email': email,
       'password': password
     },
@@ -41,7 +41,7 @@ export const LoginSignup = () => {
 
   async function addUser() {
     
-    await axios.post('http://localhost:5000/register', {
+    await axios.post('http://localhost:4000/register', {
       'email': email,
       'password': password
     },
