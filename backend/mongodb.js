@@ -14,19 +14,26 @@ class MongoDbManager {
         try {
             await this.client.connect();
             await this.client.db("admin").command({ping: 1});
-            //console.log("Pinged Deployement");
+            console.log("Pinged Mongodb Deployement Successflly!");
+        }
+
+        catch (error) {
+            console.log("Error with connecting to the mongodb database!");
+            console.log(error);
         }
         finally {
             await this.client.close();
         }
+        
     }
-    async addUser(email, password) {
+    async addUser(email, password, user) {
         let success = false;
         let hashPassword = await bcrypt.hash(password, this.saltRounds);
         let message = "";
         const doc = {
             email: email,
             password: hashPassword,
+            user: user
           }
           //console.log("Hashed password");
           //console.log(hashPassword);
@@ -46,7 +53,7 @@ class MongoDbManager {
                     await this.user_info.insertOne(doc)
                     .then(respone => {
                         //console.log("success entering info to database");
-                        message = "Succesfully register!";
+                        message = "Succesfully registered!";
                         success = true;
                     })
                     .catch(e => {
@@ -58,8 +65,9 @@ class MongoDbManager {
                 }
             
             }
-            catch {
-                //console.log("ERROR with adding user to database.");
+            catch (error) {
+                console.log("ERROR adding user to database.");
+                console.log(error);
                 message = "Error entering info to database";
                 success = false;
             }
@@ -101,8 +109,9 @@ class MongoDbManager {
                     message = "Email doesn't exist!";
                 }
             }
-            catch {
-                //console.log("ERROR with seraching for user in mongodb database.");
+            catch (error) {
+                console.log("ERROR seraching for user in mongodb database.");
+                console.log(error);
                 success = false;
                 message = "ERROR with seraching for user in mongodb database!";
             }
