@@ -36,12 +36,15 @@ const get_group = async(req, res) => {
 
 // create new group
 const create_group = async(req, res) => {
-    const {sport, time, place, group_size} = req.body
+    const {sport, date, time, place, group_size} = req.body
 
     let empty_fields = []
 
     if (!sport) {
         empty_fields.push('sport')
+    }
+    if (!date) {
+        empty_fields.push('date')
     }
     if (!time) {
         empty_fields.push('time')
@@ -59,7 +62,7 @@ const create_group = async(req, res) => {
     try {
         //add doc to db
         const user_id = req.user._id
-        const group = await Group.create({sport, time, place, group_size, creator_id: user_id, member_ids: [creator_id]})
+        const group = await Group.create({sport, date, time, place, group_size, creator_id: user_id, member_ids: [user_id]})
         res.status(200).json(group)
     } catch (error) {
         res.status(400).json({error: error.message})
@@ -97,7 +100,7 @@ const join_group = async(req, res) => {
     const group = await Group.findOneAndUpdate({_id: id}, {
         $push: {
             member_ids: {
-                $each: member._id,
+                $each: [member_id],
                 $slice: group_size
             }
         }
@@ -114,7 +117,7 @@ const join_group = async(req, res) => {
 // update a workout
 const update_group = async(req, res) => {
     const {id} = req.params
-    const {creator_id} = req.user._id
+    //const {creator_id} = req.user._id
 
     if (!mongoose.Types.ObjectId.isValid(id)) {
         return res.status(404).json({error: "No such group"})
@@ -124,9 +127,11 @@ const update_group = async(req, res) => {
         ...req.body
     })
 
+    /*
     if (group.creator_id !== creator_id) {
         return res.status(401).json({error: "Not the user who created the group"})
     }
+    */
 
     if (!group) {
         return res.status(404).json({error: "No such group"})

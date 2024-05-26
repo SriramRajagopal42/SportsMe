@@ -7,8 +7,12 @@ const group_schema = new Schema({
         type: String,
         required: true
     },
+    date: {
+        type: String,
+        required: true
+    },
     time: {
-        type: Number,
+        type: String,
         required: true
     },
     place: {
