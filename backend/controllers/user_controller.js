@@ -15,7 +15,7 @@ const login_user = async (req, res) => {
         //create a token
         const token = createToken(user._id)
 
-        res.status(200).json({username: user.username, token})
+        res.status(200).json({username: user.username, id: user._id, token})
     } catch (error) {
         res.status(400).json({error: error.message})
     }
@@ -31,10 +31,41 @@ const signup_user = async (req, res) => {
         //create a token
         const token = createToken(user._id)
 
-        res.status(200).json({username: user.username, token})
+        res.status(200).json({username: user.username, id: user._id, token})
     } catch (error) {
         res.status(400).json({error: error.message})
     }
 }
 
-module.exports = {login_user, signup_user}
+// get all users
+const get_all_users = async(req, res) => {
+    const users = await User.find({}).sort({createdAt: -1})
+
+    res.status(200).json(users)
+}
+
+// get a certain user
+const get_user = async(req, res) => {}
+
+// get filtered users
+const get_filtered_users = async(req, res) => {}
+
+// update a certain user
+const update_user = async(req, res) => {}
+
+// make certain user request a friend
+const request_friend = async(req, res) => {}
+
+// make a certain user accept a friend request
+const add_friend = async(req, res) => {}
+
+module.exports = {
+    login_user, 
+    signup_user,
+    get_all_users,
+    get_user,
+    get_filtered_users,
+    update_user,
+    request_friend,
+    add_friend
+}

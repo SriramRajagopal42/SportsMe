@@ -2,7 +2,7 @@ const express = require('express')
 const {
     get_all_groups,
     get_filtered_groups,
-    //get_workout,
+    get_group,
     create_group,
     delete_group,
     update_group,
@@ -18,11 +18,11 @@ router.get('/', get_all_groups)
 // GET certain groups
 router.get('/filtered', get_filtered_groups)
 
-//require auth for all group routes
+//require auth for some group routes
 router.use(requireAuth)
 
 // GET a single workout
-//router.get('/:id', get_workout)
+router.get('/:id', get_group)
 
 // CREATE a group
 router.post('/', create_group)
@@ -34,6 +34,6 @@ router.delete('/:id', delete_group)
 router.patch('/join/:id', join_group)
 
 // UPDATE a group
-router.patch('/update/:id', update_group)
+router.patch('/:id', update_group)
 
 module.exports = router
