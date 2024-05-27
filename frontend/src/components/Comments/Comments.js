@@ -43,7 +43,7 @@ const Comments = ({comments, group_id}) => {
             if (element) {
               const bottomPosition = element.getBoundingClientRect().bottom;
               window.scrollTo({
-                top: window.scrollY + bottomPosition,
+                top: window.scrollY + bottomPosition-window.innerHeight/2,
                 behavior: 'smooth'
               });
             }
