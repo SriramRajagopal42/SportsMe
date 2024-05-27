@@ -1,6 +1,6 @@
 import {useGroupsContext} from '../../hooks/useGroupsContext'
 import { useAuthContext } from '../../hooks/useAuthContext'
-import {useState} from 'react';
+import {useState, useEffect, useRef} from 'react';
 
 import "./Comments.css";
 
@@ -11,6 +11,7 @@ const Comments = ({comments, group_id}) => {
     const {user} = useAuthContext()
     const [comment_str, setComment] = useState('');
     const [isVisible, setIsVisible] = useState(false);
+    const commentsRef = useRef(null);
 
     const addCommment = async(event) => {
         event.preventDefault();
@@ -35,6 +36,22 @@ const Comments = ({comments, group_id}) => {
 
     }
 
+    useEffect(() => {
+        if (isVisible && commentsRef.current) {
+          const handleScroll = () => {
+            const element = commentsRef.current;
+            if (element) {
+              const bottomPosition = element.getBoundingClientRect().bottom;
+              window.scrollTo({
+                top: window.scrollY + bottomPosition,
+                behavior: 'smooth'
+              });
+            }
+          };
+          handleScroll();
+        }
+      }, [isVisible]); 
+
     
     return  (
         <div>
@@ -42,7 +59,7 @@ const Comments = ({comments, group_id}) => {
                     {isVisible ? 'Hide Comments' : 'Show Comments'}
                 </button>
              {isVisible && (
-            <div className="comments_container">
+            <div ref={commentsRef} className="comments_container">
                 {comments.map((comment, index) => (
                     <div key={index} className="comment_item">
                     <h4 className="comment_user">{comment.user}</h4>
@@ -52,7 +69,7 @@ const Comments = ({comments, group_id}) => {
                 <form className="comment_form" onSubmit={addCommment}>
                     <input 
                     type="text"
-                    className="comment-input"
+                    className="comment_input"
                     placeholder="Write a comment..."
                     value={comment_str}
                     onChange={(event) => {setComment(event.target.value)}}
