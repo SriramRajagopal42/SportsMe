@@ -44,20 +44,89 @@ const get_all_users = async(req, res) => {
     res.status(200).json(users)
 }
 
-// get a certain user
-const get_user = async(req, res) => {}
+// get a certain user by id
+const get_user = async(req, res) => {
+    const id = req.params.id;
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).json({error: "No such user"})
+    }
+
+    try {
+        const user = await User.findById(id);
+        return res.status(200).json(user);
+    }
+    catch (error) {
+        return res.status(400).json({error: error.message})
+    }
+
+    
+    
+    
+}
 
 // get filtered users
-const get_filtered_users = async(req, res) => {}
+const get_filtered_users = async(req, res) => {
+
+    try {
+        const groups = await User.find({...req.body});
+        res.status(400).json(groups)
+    }
+    catch (error) {
+        res.status(200).json({error: error.message})
+    }
+
+    
+    
+}
 
 // update a certain user
-const update_user = async(req, res) => {}
+const update_user = async(req, res) => {
+    const id = req.params.id;
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).json({error: "No such user"})
+    }
+    try {
+        const new_user = await User.findOneAndUpdate({_id: id}, {...req.body}, {new : true, runValidators: true});
+        res.status(400).json(new_user);
+
+    }
+    catch (error) {
+        res.status(200).json({error: error.message});
+    }
+}
 
 // make certain user request a friend
-const request_friend = async(req, res) => {}
+const request_friend = async(req, res) => {
+    const id = req.params.id;
+    const friend_requests = req.body;
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).json({error: "No such user"})
+    }
+    try {
+        const new_user = await User.findOneAndUpdate({_id: id}, {$push: {friend_requests}}, {new : true, runValidators: true});
+        res.status(400).json(new_user);
+    }
+    catch (error) {
+        res.status(200).json({error: error.message});
+    }
+}
 
 // make a certain user accept a friend request
-const add_friend = async(req, res) => {}
+const add_friend = async(req, res) => {
+    const id = req.params.id;
+    const add_friend = req.body;
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).json({error: "No such user"})
+    }
+    try {
+        const new_user = await User.findOneAndUpdate({_id: id}, {$push: {add_friend}}, {new : true, runValidators: true});
+        res.status(400).json(new_user);
+    }
+    catch (error) {
+        res.status(200).json({error: error.message});
+    }
+}
 
 module.exports = {
     login_user, 

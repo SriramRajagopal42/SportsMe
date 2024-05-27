@@ -30,7 +30,17 @@ const group_schema = new Schema({
     member_ids: {
         type: [String],
         required: true
-    }
+    },
+    comments: [{
+        user: {
+          type: String,
+          required: true
+        },
+        comment: {
+          type: String,
+          required: true
+        }
+      }]
 }, {timestamps: true})
 
 module.exports = mongoose.model('Group', group_schema)

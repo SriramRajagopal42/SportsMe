@@ -133,6 +133,26 @@ const update_group = async(req, res) => {
     res.status(200).json(group)
 }
 
+const update_comments = async(req, res) => {
+    const id = req.params.id;
+    const comment = {...req.body};
+    console.log("update_comments");
+    console.log(id);
+    console.log(comment);
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        console.log("No such group");
+        return res.status(404).json({error: "No such group"});
+    }
+    try {
+        const updated_group = await Group.findOneAndUpdate({_id: id}, {$push: comment}, {new : true, runValidators: true});
+        res.status(200).json(updated_group);
+    }
+    catch (error) {
+        console.log(error.message);
+        return res.status(400).json({error: error.message});
+    }
+}
+
 module.exports = {
     get_all_groups,
     get_filtered_groups,
@@ -140,5 +160,6 @@ module.exports = {
     create_group,
     delete_group,
     update_group,
-    join_group
+    join_group,
+    update_comments
 }

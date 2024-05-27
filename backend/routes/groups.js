@@ -6,7 +6,8 @@ const {
     create_group,
     delete_group,
     update_group,
-    join_group
+    join_group,
+    update_comments
 } = require("../controllers/group_controller")
 const requireAuth = require('../middleware/requireAuth')
 
@@ -33,7 +34,12 @@ router.delete('/:id', delete_group)
 // JOIN a group
 router.patch('/join/:id', join_group)
 
+//ADD A COMMENT
+router.patch("/addComment/:id", update_comments)
+
 // UPDATE a group
 router.patch('/:id', update_group)
+
+
 
 module.exports = router
