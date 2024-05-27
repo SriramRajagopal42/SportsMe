@@ -136,9 +136,7 @@ const update_group = async(req, res) => {
 const update_comments = async(req, res) => {
     const id = req.params.id;
     const comment = {...req.body};
-    console.log("update_comments");
-    console.log(id);
-    console.log(comment);
+
     if (!mongoose.Types.ObjectId.isValid(id)) {
         console.log("No such group");
         return res.status(404).json({error: "No such group"});
