@@ -10,7 +10,7 @@ const get_all_groups = async(req, res) => {
 
 // get filtered groups
 const get_filtered_groups = async(req, res) => {
-    const groups = await Group.find({...req.body}).sort({createdAt: -1})
+    const groups = await Group.find(req.body).sort({createdAt: -1})
 
     res.status(200).json(groups)
 }

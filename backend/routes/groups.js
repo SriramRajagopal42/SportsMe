@@ -16,13 +16,13 @@ const router = express.Router()
 // GET all groups
 router.get('/', get_all_groups)
 
-// GET certain groups
-router.get('/filtered', get_filtered_groups)
+// GET certain groups (needs to be a POST request because GET requests can't have bodies)
+router.post('/filtered', get_filtered_groups)
 
 //require auth for some group routes
 router.use(requireAuth)
 
-// GET a single workout
+// GET a single group
 router.get('/:id', get_group)
 
 // CREATE a group
