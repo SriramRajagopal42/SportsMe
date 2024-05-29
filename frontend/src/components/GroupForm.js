@@ -1,3 +1,4 @@
+/* eslint-disable react/react-in-jsx-scope */
 import { useState } from "react"
 import { useGroupsContext } from "../hooks/useGroupsContext"
 import { useAuthContext } from "../hooks/useAuthContext"

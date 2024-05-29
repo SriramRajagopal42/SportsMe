@@ -1,3 +1,4 @@
+import React from 'react';
 import {useEffect,} from 'react'
 import {useGroupsContext} from '../hooks/useGroupsContext'
 import {useAuthContext} from '../hooks/useAuthContext'
@@ -33,6 +34,7 @@ const Home = () => {
     return (
         <div className="home">
             <div className='workouts'>
+                <h1>Current Groups</h1>
                 {groups && groups.map((group) => (
                     <GroupDetails key={group._id} group={group} />
                 ))}

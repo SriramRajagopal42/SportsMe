@@ -60,7 +60,8 @@ const create_group = async(req, res) => {
     try {
         //add doc to db
         const user_id = req.user._id
-        const group = await Group.create({sport, date, time, place, group_size, creator_id: user_id, member_ids: [user_id]})
+        const users = req.username
+        const group = await Group.create({sport, date, time, place, group_size, creator_id: user_id, member_ids: [user_id], usernames: [users]})
         res.status(200).json(group)
     } catch (error) {
         res.status(400).json({error: error.message})
