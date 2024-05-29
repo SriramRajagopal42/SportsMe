@@ -30,8 +30,8 @@ function App() {
               element = {!user ? <Signup /> : <Navigate to={'/'} />}
             />
             <Route 
-              path = '/profile'
-              element = {!user ? <UserProfile /> : <Navigate to={'/profile'} />}
+              path="/profile" 
+              element={<UserProfile />} 
             />
           </Routes>
         </div>
