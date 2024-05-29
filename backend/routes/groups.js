@@ -19,7 +19,7 @@ router.get('/', get_all_groups)
 // GET certain groups
 router.get('/filtered', get_filtered_groups)
 
-//require auth for some group routes
+// require auth for some group routes
 router.use(requireAuth)
 
 // GET a single workout
@@ -34,7 +34,7 @@ router.delete('/:id', delete_group)
 // JOIN a group
 router.patch('/join/:id', join_group)
 
-//ADD A COMMENT
+// ADD A COMMENT
 router.patch("/addComment/:id", update_comments)
 
 // UPDATE a group

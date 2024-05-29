@@ -31,7 +31,7 @@ function App() {
             />
             <Route 
               path="/profile" 
-              element={<UserProfile />} 
+              element= {user ? <UserProfile /> : <Navigate to={'/'} />}
             />
           </Routes>
         </div>

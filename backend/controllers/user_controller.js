@@ -5,14 +5,14 @@ const createToken = (_id) => {
     return jwt.sign({_id}, process.env.SECRET, {expiresIn: '3d'})
 }
 
-//login user
+// login user
 const login_user = async (req, res) => {
     const {email_or_username, password} = req.body
 
     try {
         const user = await User.login(email_or_username, password)
 
-        //create a token
+        // create a token
         const token = createToken(user._id)
 
         res.status(200).json({username: user.username, id: user._id, token})
@@ -21,14 +21,14 @@ const login_user = async (req, res) => {
     }
 }
 
-//signup user
+// signup user
 const signup_user = async (req, res) => {
     const {username, email, password} = req.body
 
     try {
         const user = await User.signup(username, email, password)
 
-        //create a token
+        // create a token
         const token = createToken(user._id)
 
         res.status(200).json({username: user.username, id: user._id, token})
@@ -59,10 +59,6 @@ const get_user = async(req, res) => {
     catch (error) {
         return res.status(400).json({error: error.message})
     }
-
-    
-    
-    
 }
 
 // get filtered users
@@ -75,9 +71,6 @@ const get_filtered_users = async(req, res) => {
     catch (error) {
         res.status(200).json({error: error.message})
     }
-
-    
-    
 }
 
 // update a certain user
@@ -89,7 +82,6 @@ const update_user = async(req, res) => {
     try {
         const new_user = await User.findOneAndUpdate({_id: id}, {...req.body}, {new : true, runValidators: true});
         res.status(400).json(new_user);
-
     }
     catch (error) {
         res.status(200).json({error: error.message});
