@@ -1,17 +1,46 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useAuthContext } from '../../hooks/useAuthContext';
 import './UserProfile.css';
 
 const UserProfile = () => {
   const { user } = useAuthContext();
+  const [userData, setUserData] = useState(null);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    if (user) {
+      const fetchUserData = async () => {
+        try {
+          const response = await fetch(`http://localhost:4000/api/users/${user.id}`, {
+            headers: {
+              'Authorization': `Bearer ${user.token}`
+            }
+          });
+
+          if (!response.ok) {
+            throw new Error(`Error ${response.status}: ${response.statusText}`);
+          }
+
+          const data = await response.json();
+          setUserData(data);
+        } catch (err) {
+          setError(err.message);
+        }
+      };
+      fetchUserData();
+    }
+  }, [user]);
 
   return (
     <div className="user-profile">
       <h2>User Profile</h2>
-      {user ? (
+      <p>User ID: {user.id}</p>
+      {error && <p>{error}</p>}
+      {userData ? (
         <>
-          <p>Username: {user.username}</p>
-          <p>Email: {user.email}</p>
+          <p>Username: {userData.username}</p>
+          <p>Email: {userData.email}</p>
+          {/* Display the user ID */}
           {/* Add more user information here if needed */}
         </>
       ) : (
