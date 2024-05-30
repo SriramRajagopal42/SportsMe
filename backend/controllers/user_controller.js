@@ -92,12 +92,13 @@ const update_user = async(req, res) => {
 // make certain user request a friend
 const request_friend = async(req, res) => {
     const id = req.params.id;
-    const friend_requests = req.body;
+    const req_id = req.body._id
     if (!mongoose.Types.ObjectId.isValid(id)) {
         return res.status(404).json({error: "No such user"})
     }
     try {
-        const new_user = await User.findOneAndUpdate({_id: id}, {$push: {friend_requests}}, {new : true, runValidators: true});
+        //addToSet will ensure all friend requests are unique, i.e no duplicates.
+        const new_user = await User.findByIdAndUpdate(req_id, {$addToSet: {friend_requests: id}}, {new : true, runValidators: true});
         res.status(400).json(new_user);
     }
     catch (error) {
@@ -108,12 +109,18 @@ const request_friend = async(req, res) => {
 // make a certain user accept a friend request
 const add_friend = async(req, res) => {
     const id = req.params.id;
-    const add_friend = req.body;
+    const add_friend_id = req.body.friend;
     if (!mongoose.Types.ObjectId.isValid(id)) {
         return res.status(404).json({error: "No such user"})
     }
     try {
-        const new_user = await User.findOneAndUpdate({_id: id}, {$push: {add_friend}}, {new : true, runValidators: true});
+        await User.findByIdAndUpdate(id, {$addToSet: {friends: add_friend_id}}, {new : true, runValidators: true});
+        //remove friend from list of friend_requests
+        const new_user = await User.findByIdAndUpdate(id, {$pull: {friend_requests: add_friend_id}}, {new : true, runValidators: true});
+
+        //the friend who originally issues the friend request
+        await User.findByIdAndUpdate(add_friend_id, {$addToSet: {friends: id}}, {new : true, runValidators: true});
+        await User.findByIdAndUpdate(add_friend_id, {$pull: {friend_requests: id}}, {new : true, runValidators: true});
         res.status(400).json(new_user);
     }
     catch (error) {
