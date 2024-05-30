@@ -1,5 +1,14 @@
 const User = require('../models/user_model')
 const jwt = require('jsonwebtoken')
+var nodemailer = require('nodemailer');
+
+var transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: process.env.GMAIL,
+    pass: process.env.GMAILPASS
+  }
+});
 
 const createToken = (_id) => {
     return jwt.sign({_id}, process.env.SECRET, {expiresIn: '3d'})
@@ -30,8 +39,18 @@ const signup_user = async (req, res) => {
 
         //create a token
         const token = createToken(user._id)
+        
+        var mailOptions = {
+            from: process.env.GMAIL,
+            to: email,
+            subject: `Thank you for signing up, ${username}!`,
+            text: 'I hope you enjoy making groups using our website!'
+        }
+  
+        transporter.sendMail(mailOptions)
 
         res.status(200).json({username: user.username, id: user._id, token})
+
     } catch (error) {
         res.status(400).json({error: error.message})
     }
@@ -98,6 +117,17 @@ const request_friend = async(req, res) => {
     }
     try {
         const new_user = await User.findOneAndUpdate({_id: id}, {$push: {friend_requests}}, {new : true, runValidators: true});
+        const requester = await User.findById(friend_requests)
+        
+        var mailOptions = {
+            from: process.env.GMAIL,
+            to: new_user.email,
+            subject: 'You have a new friend request!',
+            text: `Hello ${new_user.username}, you have a new friend request from ${requester.username}, check it out!`
+        }
+  
+        transporter.sendMail(mailOptions)
+
         res.status(400).json(new_user);
     }
     catch (error) {
@@ -108,12 +138,23 @@ const request_friend = async(req, res) => {
 // make a certain user accept a friend request
 const add_friend = async(req, res) => {
     const id = req.params.id;
-    const add_friend = req.body;
+    const friend_to_add = req.body;
     if (!mongoose.Types.ObjectId.isValid(id)) {
         return res.status(404).json({error: "No such user"})
     }
     try {
-        const new_user = await User.findOneAndUpdate({_id: id}, {$push: {add_friend}}, {new : true, runValidators: true});
+        const new_user = await User.findOneAndUpdate({_id: id}, {$push: {friends: friend_to_add}}, {new : true, runValidators: true});
+        const requester = await User.findById(friend_to_add)
+        
+        var mailOptions = {
+            from: process.env.GMAIL,
+            to: requester.email,
+            subject: 'Your friend request got accepted!',
+            text: `Hello ${requester.username}, ${new_user.username} just accepted your friend request!`
+        }
+  
+        transporter.sendMail(mailOptions)
+        
         res.status(400).json(new_user);
     }
     catch (error) {
