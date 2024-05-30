@@ -1,5 +1,6 @@
-const Group = require('../models/group_model')
 const mongoose = require('mongoose')
+const Group = require('../models/group_model')
+const User = require('../models/user_model')
 
 // get all groups
 const get_all_groups = async(req, res) => {
@@ -94,7 +95,7 @@ const join_group = async(req, res) => {
         return res.status(404).json({error: "No such group"})
     }
 
-    const group_size = await Group.findOne({_id: id}).select('group_size')
+    const group_size = await Group.findById(id).select('group_size')
 
     const group = await Group.findOneAndUpdate({_id: id}, {
         $push: {
@@ -124,7 +125,7 @@ const update_group = async(req, res) => {
 
     const group = await Group.findOneAndUpdate({_id: id, creator_id}, {
         ...req.body
-    })
+    }, {new: true, runValidators: true})
 
     if (!group) {
         return res.status(404).json({error: "Not the user who created the group"})
@@ -151,6 +152,29 @@ const update_comments = async(req, res) => {
     }
 }
 
+const get_all_members = async(req, res) => {
+    const id = req.params.id
+    
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        console.log("No such group");
+        return res.status(404).json({error: "No such group"});
+    }
+
+    const ids = await Group.findById(id).select('member_ids')
+
+    if (!ids) {
+        return res.status(404).json({error: "No such group"})
+    }
+
+    const users = await User.find({ '_id': { $in: ids } })
+
+    if (!users) {
+        return res.status(404).json({error: "At least one of the users is invalid"})
+    }
+
+    res.status(200).json(users)
+}
+
 module.exports = {
     get_all_groups,
     get_filtered_groups,
@@ -159,5 +183,6 @@ module.exports = {
     delete_group,
     update_group,
     join_group,
-    update_comments
+    update_comments,
+    get_all_members
 }

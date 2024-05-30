@@ -2,7 +2,7 @@ import {useGroupsContext} from '../hooks/useGroupsContext'
 import { useAuthContext } from '../hooks/useAuthContext'
 //date fns
 import formatDistanceToNow from 'date-fns/formatDistanceToNow'
-import Comments from './Comments/Comments'
+import Comments from './comments/Comments'
 
 const GroupDetails = ({group}) => {
 

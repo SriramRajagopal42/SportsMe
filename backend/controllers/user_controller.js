@@ -15,7 +15,7 @@ const login_user = async (req, res) => {
         //create a token
         const token = createToken(user._id)
 
-        res.status(200).json({username: user.username, id: user._id, token})
+        res.status(200).json({/*username: user.username, */id: user._id, token})
     } catch (error) {
         res.status(400).json({error: error.message})
     }
@@ -59,10 +59,6 @@ const get_user = async(req, res) => {
     catch (error) {
         return res.status(400).json({error: error.message})
     }
-
-    
-    
-    
 }
 
 // get filtered users
@@ -75,9 +71,6 @@ const get_filtered_users = async(req, res) => {
     catch (error) {
         res.status(200).json({error: error.message})
     }
-
-    
-    
 }
 
 // update a certain user
