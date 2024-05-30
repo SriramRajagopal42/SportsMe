@@ -11,7 +11,7 @@ const UserProfile = () => {
     if (user) {
       const fetchUserData = async () => {
         try {
-          const response = await fetch(`http://localhost:4000/api/users/${user.id}`, {
+          const response = await fetch(`http://localhost:4000/api/user/${user.id}`, {
             headers: {
               'Authorization': `Bearer ${user.token}`
             }
@@ -22,6 +22,7 @@ const UserProfile = () => {
           }
 
           const data = await response.json();
+
           setUserData(data);
         } catch (err) {
           setError(err.message);
@@ -34,7 +35,6 @@ const UserProfile = () => {
   return (
     <div className="user-profile">
       <h2>User Profile</h2>
-      <p>User ID: {user.id}</p>
       {error && <p>{error}</p>}
       {userData ? (
         <>
