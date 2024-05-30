@@ -1,6 +1,15 @@
 const mongoose = require('mongoose')
 const Group = require('../models/group_model')
 const User = require('../models/user_model')
+var nodemailer = require('nodemailer');
+
+var transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: process.env.GMAIL,
+    pass: process.env.GMAILPASS
+  }
+});
 
 // get all groups
 const get_all_groups = async(req, res) => {
@@ -109,6 +118,18 @@ const join_group = async(req, res) => {
     if (!group) {
         return res.status(404).json({error: "No such group"})
     }
+
+    const creator = await User.findById(group.creator_id)
+    const member = await User.findById(member_id)
+
+    var mailOptions = {
+        from: process.env.GMAIL,
+        to: email,
+        subject: 'New group member!',
+        text: `Hello ${creator.username}, ${member.username} just joined your ${group.sport} group, say hello!`
+    }
+
+    transporter.sendMail(mailOptions)
 
     res.status(200).json(group)
 
