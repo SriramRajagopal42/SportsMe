@@ -26,6 +26,27 @@ const user_schema = new Schema({
     friend_requests: {
         type: [String],
         required: true
+    },
+    gender: {
+        type: String,
+    },
+    pronouns: {
+        type: String,
+    },
+    fav_sport: {
+        type: String,
+    },
+    year: {
+        type: Number,
+    },
+    major: {
+        type: String,
+    },
+    height: {
+        type: Number,
+    },
+    skill_level: {
+        type: String,
     }
 })
 
