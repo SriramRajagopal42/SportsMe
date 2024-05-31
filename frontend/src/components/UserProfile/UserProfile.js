@@ -59,14 +59,17 @@ const UserProfile = () => {
         },
         body: JSON.stringify(formData)
       });
+      console.log(response);
       if (!response.ok) {
+        console.log("we're cooked");
         throw new Error(`Error ${response.status}: ${response.statusText}`);
       }
       const updatedData = await response.json();
       setUserData(updatedData);
-      setIsEditing(false);
     } catch (err) {
       setError(err.message);
+    } finally {
+      setIsEditing(false);
     }
   };
 
@@ -96,7 +99,7 @@ const UserProfile = () => {
                   onChange={handleInputChange}
                 />
               </label>
-              <button type="submit" onClick ={() => setIsEditing(false)}>Save</button>
+              <button type="submit">Save</button>
               <button type="button" onClick={() => setIsEditing(false)}>Cancel</button>
             </form>
           ) : (
