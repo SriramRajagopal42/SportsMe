@@ -1,0 +1,80 @@
+.user-profile {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.user-profile h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.user-profile p {
+  font-size: 16px;
+  margin: 10px 0;
+}
+
+.user-profile form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.user-profile label {
+  font-size: 14px;
+  color: #555;
+}
+
+.user-profile input {
+  padding: 8px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.user-profile button {
+  padding: 10px 15px;
+  font-size: 14px;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.user-profile button:hover {
+  background-color: #0056b3;
+}
+
+.user-profile button[type="button"] {
+  background-color: #6c757d;
+  margin-left: 10px;
+}
+
+.user-profile button[type="button"]:hover {
+  background-color: #5a6268;
+}
+
+.user-profile form button {
+  align-self: flex-end;
+}
+
+.user-profile .form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.user-profile .form-group input {
+  margin-top: 5px;
+}
+
+.user-profile .error {
+  color: red;
+  font-size: 14px;
+  margin-bottom: 10px;
+  text-align: center;
+}
