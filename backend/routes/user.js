@@ -30,8 +30,8 @@ router.get('/', get_all_users)
 // GET a certain user
 router.get('/:id', get_user)
 
-// GET filtered users
-router.get('/filtered', get_filtered_users)
+// GET filtered users (needs to be a POST request because GET requests can't have bodies)
+router.post('/filtered', get_filtered_users)
 
 // UPDATE user info
 router.patch('/:id', update_user)
