@@ -67,10 +67,10 @@ const get_filtered_users = async(req, res) => {
 
     try {
         const groups = await User.find({...req.body});
-        res.status(400).json(groups)
+        res.status(200).json(groups)
     }
     catch (error) {
-        res.status(200).json({error: error.message})
+        res.status(400).json({error: error.message})
     }
 }
 
@@ -82,10 +82,10 @@ const update_user = async(req, res) => {
     }
     try {
         const new_user = await User.findOneAndUpdate({_id: id}, {...req.body}, {new : true, runValidators: true});
-        res.status(400).json(new_user);
+        res.status(200).json(new_user);
     }
     catch (error) {
-        res.status(200).json({error: error.message});
+        res.status(400).json({error: error.message});
     }
 }
 
@@ -98,10 +98,10 @@ const request_friend = async(req, res) => {
     }
     try {
         const new_user = await User.findOneAndUpdate({_id: id}, {$push: {friend_requests}}, {new : true, runValidators: true});
-        res.status(400).json(new_user);
+        res.status(200).json(new_user);
     }
     catch (error) {
-        res.status(200).json({error: error.message});
+        res.status(400).json({error: error.message});
     }
 }
 
@@ -114,10 +114,10 @@ const add_friend = async(req, res) => {
     }
     try {
         const new_user = await User.findOneAndUpdate({_id: id}, {$push: {add_friend}}, {new : true, runValidators: true});
-        res.status(400).json(new_user);
+        res.status(200).json(new_user);
     }
     catch (error) {
-        res.status(200).json({error: error.message});
+        res.status(400).json({error: error.message});
     }
 }
 
