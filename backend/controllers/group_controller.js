@@ -1,5 +1,15 @@
-const Group = require('../models/group_model')
 const mongoose = require('mongoose')
+const Group = require('../models/group_model')
+const User = require('../models/user_model')
+var nodemailer = require('nodemailer');
+
+var transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: process.env.GMAIL,
+    pass: process.env.GMAILPASS
+  }
+});
 
 // get all groups
 const get_all_groups = async(req, res) => {
@@ -10,7 +20,7 @@ const get_all_groups = async(req, res) => {
 
 // get filtered groups
 const get_filtered_groups = async(req, res) => {
-    const groups = await Group.find({...req.body}).sort({createdAt: -1})
+    const groups = await Group.find(req.body).sort({createdAt: -1})
 
     res.status(200).json(groups)
 }
@@ -96,7 +106,7 @@ const join_group = async(req, res) => {
         return res.status(404).json({error: "No such group"})
     }
 
-    const group_size = await Group.findOne({_id: id}).select('group_size')
+    const group_size = await Group.findById(id).select('group_size')
 
     const group = await Group.findOneAndUpdate({_id: id}, {
         $push: {
@@ -110,6 +120,18 @@ const join_group = async(req, res) => {
     if (!group) {
         return res.status(404).json({error: "No such group"})
     }
+
+    const creator = await User.findById(group.creator_id)
+    const member = await User.findById(member_id)
+
+    var mailOptions = {
+        from: process.env.GMAIL,
+        to: email,
+        subject: 'New group member!',
+        text: `Hello ${creator.username}, ${member.username} just joined your ${group.sport} group, say hello!`
+    }
+
+    transporter.sendMail(mailOptions)
 
     res.status(200).json(group)
 
@@ -126,13 +148,54 @@ const update_group = async(req, res) => {
 
     const group = await Group.findOneAndUpdate({_id: id, creator_id}, {
         ...req.body
-    })
+    }, {new: true, runValidators: true})
 
     if (!group) {
         return res.status(404).json({error: "Not the user who created the group"})
     }
 
     res.status(200).json(group)
+}
+
+const update_comments = async(req, res) => {
+    const id = req.params.id;
+    const comment = {...req.body};
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        console.log("No such group");
+        return res.status(404).json({error: "No such group"});
+    }
+    try {
+        const updated_group = await Group.findOneAndUpdate({_id: id}, {$push: comment}, {new : true, runValidators: true});
+        res.status(200).json(updated_group);
+    }
+    catch (error) {
+        console.log(error.message);
+        return res.status(400).json({error: error.message});
+    }
+}
+
+const get_all_members = async(req, res) => {
+    const id = req.params.id
+    
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        console.log("No such group");
+        return res.status(404).json({error: "No such group"});
+    }
+
+    const ids = await Group.findById(id).select('member_ids')
+
+    if (!ids) {
+        return res.status(404).json({error: "No such group"})
+    }
+
+    const users = await User.find({ '_id': { $in: ids } })
+
+    if (!users) {
+        return res.status(404).json({error: "At least one of the users is invalid"})
+    }
+
+    res.status(200).json(users)
 }
 
 module.exports = {
@@ -142,5 +205,7 @@ module.exports = {
     create_group,
     delete_group,
     update_group,
-    join_group
+    join_group,
+    update_comments,
+    get_all_members
 }

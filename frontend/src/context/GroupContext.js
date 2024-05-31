@@ -17,6 +17,15 @@ export const groupsReducer = (state, action) => {
             return {
                 groups: state.groups.filter((w) => w._id !== action.payload._id)
             }
+        case 'UPDATE_GROUP':
+            return {
+                groups: state.groups.map((w) => {
+                    if(w._id === action.payload._id) {
+                        return action.payload;
+                    }
+                    return w;
+                })
+            }
         default:
             return state
     }

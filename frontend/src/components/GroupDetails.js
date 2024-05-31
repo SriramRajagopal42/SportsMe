@@ -2,15 +2,14 @@
 import {useGroupsContext} from '../hooks/useGroupsContext'
 import { useAuthContext } from '../hooks/useAuthContext'
 import {useEffect,} from 'react'
-
 //date fns
 import formatDistanceToNow from 'date-fns/formatDistanceToNow'
+import Comments from './Comments/Comments'
 
 const GroupDetails = ({group}) => {
 
     const {dispatch} = useGroupsContext()
     const {user} = useAuthContext()
-
     const handleClick = async() => {
         if (!user) {
             return
@@ -22,6 +21,8 @@ const GroupDetails = ({group}) => {
                 'Authorization': `Bearer ${user.token}`
             }
         })
+
+        console.log(response);
 
         const json = await response.json()
 
@@ -39,6 +40,8 @@ const GroupDetails = ({group}) => {
             <p><strong>Time: </strong>{group.time}</p>
             <p><strong>Group size: </strong>{group.group_size}</p>
             <p>{formatDistanceToNow(new Date(group.createdAt), {addSuffix: true})}</p>
+            <hr />
+            <Comments comments={group.comments} group_id={group._id}/>
             <span className="material-symbols-outlined" onClick={handleClick}>delete</span>
         </div>
     )

@@ -21,8 +21,11 @@ const Home = () => {
 
     useEffect(() => {
         const fetch_groups = async() => {
-            const response = await fetch('http://localhost:4000/api/groups', {
+                const response = await fetch('http://localhost:4000/api/groups/filtered', {
+                method: 'POST',
+                body: JSON.stringify({member_ids: user.id}),
                 headers: {
+                    "Content-Type": "application/json",
                     'Authorization': `Bearer ${user.token}`
                 }
             })
