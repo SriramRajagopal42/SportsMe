@@ -59,9 +59,7 @@ const UserProfile = () => {
         },
         body: JSON.stringify(formData)
       });
-      console.log(response);
       if (!response.ok) {
-        console.log("we're cooked");
         throw new Error(`Error ${response.status}: ${response.statusText}`);
       }
       const updatedData = await response.json();
@@ -71,7 +69,7 @@ const UserProfile = () => {
     } finally {
       setIsEditing(false);
     }
-  };
+  }; 
 
   return (
     <div className="user-profile">
