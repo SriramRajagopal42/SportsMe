@@ -38,6 +38,18 @@ header a {
   grid-template-columns: 3fr 1fr;
   gap: 100px;
 }
+
+.home-button{
+  background: var(--primary);
+  border: 0;
+  color: #fff;
+  padding: 20px;
+  font-family: "Poppins";
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 25px;
+}
+
 .workout-details {
   background: #fff;
   border-radius: 4px;

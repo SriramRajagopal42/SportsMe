@@ -4,7 +4,7 @@ const Schema = mongoose.Schema
 
 const group_schema = new Schema({
     usernames: {
-        type: String,
+        type: [String],
         required: true
     },
     sport: {

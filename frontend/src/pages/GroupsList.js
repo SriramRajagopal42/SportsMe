@@ -8,7 +8,8 @@ import { useNavigate } from 'react-router-dom';
 import GroupDetails from '../components/GroupDetails'
 import GroupForm from '../components/GroupForm'
 
-const Home = () => {
+
+const GroupsList = () => {
 
     const {groups, dispatch} = useGroupsContext()
     const {user} = useAuthContext()
@@ -46,16 +47,14 @@ const Home = () => {
     return (
         <div className="home">
             <div className='workouts'>
-                <h1>Current Groups</h1>
+                <h1>Available Groups</h1>
                 {groups && groups.map((group) => (
                     <GroupDetails key={group._id} group={group} />
                 ))}
-                <button className="home-button" onClick={handleClick}>Look For Groups</button>
 
             </div>
-            <GroupForm />
         </div>
     )
 }
 
-export default Home
+export default GroupsList
