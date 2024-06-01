@@ -26,6 +26,9 @@ const Navbar = () => {
                         <Link to ="/profile">
                             <button className="button">My Profile</button>
                         </Link>
+                        <Link to="/friends">
+                            <button className="button">Friends</button>
+                        </Link>
                     </div>
                     )}
                     {!user && (
