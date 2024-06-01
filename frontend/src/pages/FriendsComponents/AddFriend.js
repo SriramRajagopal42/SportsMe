@@ -18,7 +18,7 @@ const AddFriend = ({ userId }) => {
     <div>
       <input
         type="text"
-        placeholder="Friend ID"
+        placeholder="Username"
         value={friendId}
         onChange={e => setFriendId(e.target.value)}
       />
