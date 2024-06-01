@@ -1,3 +1,4 @@
+import React from 'react';
 import {BrowserRouter, Routes, Route, Navigate} from 'react-router-dom'
 import { useAuthContext } from './hooks/useAuthContext';
 
@@ -6,7 +7,8 @@ import Home from './pages/Home'
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import UserProfile from './pages/UserProfile/UserProfile'
-import Navbar from './components/Navbar'
+import GroupsList from './pages/GroupsList';
+import Navbar from './components/Navbar';
 
 function App() {
   const {user} = useAuthContext()
@@ -32,6 +34,10 @@ function App() {
             <Route 
               path="/profile" 
               element= {user ? <UserProfile /> : <Navigate to={'/'} />}
+            />
+            <Route 
+              path = '/groupslist'
+              element = {user ? <GroupsList /> : <Navigate to={'/'} />}
             />
           </Routes>
         </div>

@@ -65,12 +65,14 @@ const create_group = async(req, res) => {
     }
     if (empty_fields.length > 0) {
         return res.status(400).json({error: 'Please fill in all of the fields', empty_fields})
-    }
+    } 
 
     try {
         //add doc to db
+        console.log(req);
         const user_id = req.user._id
-        const group = await Group.create({sport, date, time, place, group_size, creator_id: user_id, member_ids: [user_id]})
+        const users = req.username
+        const group = await Group.create({sport, date, time, place, group_size, creator_id: user_id, member_ids: [user_id], usernames: [users]})
         res.status(200).json(group)
     } catch (error) {
         res.status(400).json({error: error.message})

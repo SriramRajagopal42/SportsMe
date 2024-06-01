@@ -8,20 +8,23 @@ const user_schema = new Schema({
     username: {
         type: String,
         required: true,
-        unique: true
+        unique: true,
+        immutable: true
     },
     email: {
         type: String,
         required: true,
-        unique: true
+        unique: true,
+        immutable: true
     },
     password: {
         type: String,
-        required: true
+        required: true,
+        immutable: true
     },
     friends: {
         type: [String],
-        required: true
+        required: true,
     },
     friend_requests: {
         type: [String],

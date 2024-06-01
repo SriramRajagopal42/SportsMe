@@ -1,24 +1,21 @@
 import React from 'react';
-import {useEffect,} from 'react';
-import {useGroupsContext} from '../hooks/useGroupsContext';
-import {useAuthContext} from '../hooks/useAuthContext';
-import { Link } from 'react-router-dom';
+import {useEffect,} from 'react'
+import {useGroupsContext} from '../hooks/useGroupsContext'
+import {useAuthContext} from '../hooks/useAuthContext'
 import { useNavigate } from 'react-router-dom';
 
-// Components
+//components
 import GroupDetails from '../components/GroupDetails'
-import GroupForm from '../components/GroupForm'
 
-const Home = () => {
+
+const GroupsList = () => {
 
     const {groups, dispatch} = useGroupsContext()
     const {user} = useAuthContext()
 
-    const navigate = useNavigate();
 
-    const handleClick = () => {
-        navigate('/groupslist');
-    };
+
+
 
     useEffect(() => {
         const fetch_groups = async() => {
@@ -26,7 +23,7 @@ const Home = () => {
                 method: 'POST',
 
                 //This line does the filtering
-                body: JSON.stringify({member_ids: user.id}),
+                // body: JSON.stringify({member_ids: user.id}),
 
                 headers: {
                     "Content-Type": "application/json",
@@ -47,22 +44,31 @@ const Home = () => {
     }, [dispatch, user])
 
 
+    const userNotInGroups = groups.map(group => {
+        if (group.member_ids.includes(user.id)){
+            return undefined;
+        } else {
+            return group;
+        }
+    }).filter(item => item !== undefined); // Remove undefined elements
+
+    //groups
+    //  group -. member_ids
+    //              ids
 
 
 
     return (
         <div className="home">
             <div className='workouts'>
-                <h1>Current Groups</h1>
-                {groups && groups.map((group) => (
+                <h1>Available Groups</h1>
+                {userNotInGroups && userNotInGroups.map((group) => (
                     <GroupDetails key={group._id} group={group} />
                 ))}
-                <button className="home-button" onClick={handleClick}>Look For Groups</button>
 
             </div>
-            <GroupForm />
         </div>
     )
 }
 
-export default Home
+export default GroupsList

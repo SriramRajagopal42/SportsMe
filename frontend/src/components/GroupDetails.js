@@ -1,3 +1,4 @@
+/* eslint-disable react/react-in-jsx-scope */
 import {useGroupsContext} from '../hooks/useGroupsContext'
 import { useAuthContext } from '../hooks/useAuthContext'
 //date fns
@@ -30,6 +31,7 @@ const GroupDetails = ({group}) => {
     return (
         <div className="workout-details">
             <h4>{group.sport}</h4>
+            <p><strong>Members: </strong>{group.usernames}</p>
             <p><strong>Place: </strong>{group.place}</p>
             <p><strong>Date: </strong>{group.date}</p>
             <p><strong>Time: </strong>{group.time}</p>
