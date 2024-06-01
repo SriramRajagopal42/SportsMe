@@ -6,7 +6,6 @@ import { useNavigate } from 'react-router-dom';
 
 //components
 import GroupDetails from '../components/GroupDetails'
-import GroupForm from '../components/GroupForm'
 
 
 const GroupsList = () => {
@@ -14,16 +13,20 @@ const GroupsList = () => {
     const {groups, dispatch} = useGroupsContext()
     const {user} = useAuthContext()
 
-    const navigate = useNavigate();
 
-    const handleClick = () => {
-        navigate('/groupslist');
-    };
+
+
 
     useEffect(() => {
         const fetch_groups = async() => {
-            const response = await fetch('http://localhost:4000/api/groups', {
+                const response = await fetch('http://localhost:4000/api/groups/filtered', {
+                method: 'POST',
+
+                //This line does the filtering
+                // body: JSON.stringify({member_ids: user.id}),
+
                 headers: {
+                    "Content-Type": "application/json",
                     'Authorization': `Bearer ${user.token}`
                 }
             })
@@ -41,6 +44,17 @@ const GroupsList = () => {
     }, [dispatch, user])
 
 
+    const userNotInGroups = groups.map(group => {
+        if (group.member_ids.includes(user.id)){
+            return undefined;
+        } else {
+            return group;
+        }
+    }).filter(item => item !== undefined); // Remove undefined elements
+
+    //groups
+    //  group -. member_ids
+    //              ids
 
 
 
@@ -48,7 +62,7 @@ const GroupsList = () => {
         <div className="home">
             <div className='workouts'>
                 <h1>Available Groups</h1>
-                {groups && groups.map((group) => (
+                {userNotInGroups && userNotInGroups.map((group) => (
                     <GroupDetails key={group._id} group={group} />
                 ))}
 

@@ -1,7 +1,6 @@
 /* eslint-disable react/react-in-jsx-scope */
 import {useGroupsContext} from '../hooks/useGroupsContext'
 import { useAuthContext } from '../hooks/useAuthContext'
-import {useEffect,} from 'react'
 //date fns
 import formatDistanceToNow from 'date-fns/formatDistanceToNow'
 import Comments from './Comments/Comments'
