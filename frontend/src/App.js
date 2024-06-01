@@ -5,8 +5,8 @@ import { useAuthContext } from './hooks/useAuthContext';
 import Home from './pages/Home'
 import Login from './pages/Login';
 import Signup from './pages/Signup';
+import UserProfile from './pages/UserProfile/UserProfile'
 import Navbar from './components/Navbar'
-import UserProfile from './components/UserProfile/UserProfile'
 
 function App() {
   const {user} = useAuthContext()
