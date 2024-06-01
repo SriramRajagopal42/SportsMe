@@ -1,6 +1,7 @@
 const User = require('../models/user_model')
 const jwt = require('jsonwebtoken')
 var nodemailer = require('nodemailer');
+const mongoose = require('mongoose');
 
 var transporter = nodemailer.createTransport({
   service: 'gmail',
