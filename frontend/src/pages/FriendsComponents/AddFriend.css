@@ -1,0 +1,36 @@
+.user-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; 
+    padding: 20px;
+    margin: auto;
+}
+
+.user-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: #f9f9f9; 
+    border: 1px solid #ddd; 
+    border-radius: 8px;
+}
+
+.username {
+    font-size: 16px;
+    color: #333; 
+}
+
+.add-friend-btn {
+    padding: 6px 12px;
+    font-size: 14px;
+    color: white;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.add-friend-btn:hover {
+    background-color: #0056b3;
+}

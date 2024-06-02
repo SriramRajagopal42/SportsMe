@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useAuthContext } from '../../hooks/useAuthContext';
-
+import "./AddFriend.css";
 const AddFriend = ({ userId }) => {
   const [friendId, setFriendId] = useState('');
   const [filtered_users, setFilteredUsers] = useState([]);
@@ -10,14 +10,11 @@ const AddFriend = ({ userId }) => {
 
   useEffect(()=> {
     setFilteredUsers(allUsers.filter((user) => {
-          return user.username.includes(friendId);
+          return user.username.toLowerCase().includes(friendId.toLowerCase());
       }));
-
-        
   }, [friendId]);
 
   useEffect(() => {
-
     const get_users = async() => {
       try {
           const users =  await axios.get('http://localhost:4000/api/user', {
@@ -32,7 +29,6 @@ const AddFriend = ({ userId }) => {
       }
     }
     get_users();
-
   }, [user])
 
   const handleAddFriend = async (friend_id) => {
@@ -41,15 +37,12 @@ const AddFriend = ({ userId }) => {
       await axios.patch('http://localhost:4000/api/user/friends/request/' + user.id, {
             _id: {friend_id}
       },
-
       {
         headers: {
           Authorization: `Bearer ${user.token}`,
           'Content-Type': 'application/json'
         }
       }
-    
-    
     );
       alert('Friend added successfully');
     } catch (err) {
@@ -66,15 +59,17 @@ const AddFriend = ({ userId }) => {
         value={friendId}
         onChange={e => setFriendId(e.target.value)}
       />
-      
-      {filtered_users.map((filtered_user, index)=> {
-        return (
-          <div key={index}>
-              {filtered_user.username}
-              <button onClick={() => {handleAddFriend(filtered_user._id)}}>Add Friend</button>
-          </div>
-        );
-      })}
+      <div className="user-list">
+            {filtered_users.map((filtered_user, index)=> {
+          return (
+            <div key={index} className="user-card">
+                <span className="username" >{filtered_user.username}</span>
+                <button className="add-friend-btn" onClick={() => {handleAddFriend(filtered_user._id)}}>Add Friend</button>
+            </div>
+          );
+            })}
+      </div>
+
     </div>
   );
 };
