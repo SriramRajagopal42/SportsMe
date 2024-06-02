@@ -35,9 +35,22 @@ const AddFriend = ({ userId }) => {
 
   }, [user])
 
-  const handleAddFriend = async () => {
+  const handleAddFriend = async (friend_id) => {
     try {
-      await axios.post('http://localhost:4000/api/user', { userId, friendId });
+      console.log(user);
+      await axios.patch('http://localhost:4000/api/user/friends/request/' + user.id, {
+            _id: {friend_id}
+      },
+
+      {
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+          'Content-Type': 'application/json'
+        }
+      }
+    
+    
+    );
       alert('Friend added successfully');
     } catch (err) {
       console.error('Error adding friend', err);
@@ -58,7 +71,7 @@ const AddFriend = ({ userId }) => {
         return (
           <div key={index}>
               {filtered_user.username}
-              <button onClick={handleAddFriend}>Add Friend</button>
+              <button onClick={() => {handleAddFriend(filtered_user._id)}}>Add Friend</button>
           </div>
         );
       })}

@@ -112,15 +112,15 @@ const update_user = async(req, res) => {
 // make certain user request a friend
 const request_friend = async(req, res) => {
     const id = req.params.id;
-    const req_id = req.body._id
+    const req_id = req.body._id.friend_id;
     if (!mongoose.Types.ObjectId.isValid(id)) {
         return res.status(404).json({error: "No such user"})
     }
     try {
         //addToSet will ensure all friend requests are unique, i.e no duplicates.
         const new_user = await User.findByIdAndUpdate(req_id, {$addToSet: {friend_requests: id}}, {new : true, runValidators: true});
-        const requester = await User.findById(friend_requests)
-        
+        const requester = await User.findById(id);
+
         var mailOptions = {
             from: process.env.GMAIL,
             to: new_user.email,
