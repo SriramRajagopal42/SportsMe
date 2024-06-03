@@ -1,0 +1,33 @@
+/* RemoveFriend.css */
+.remove-friend-container {
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    background-color: #f0f8ff;
+  }
+  
+  .remove-friend-input {
+    width: 80%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #d1e0e0;
+    border-radius: 5px;
+  }
+  
+  .remove-friend-button {
+    padding: 8px 16px;
+    font-size: 14px;
+    color: white;
+    background-color: #ff4d4d;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .remove-friend-button:hover {
+    background-color: #cc0000;
+  }
+  

@@ -1,31 +1,30 @@
 /* FriendRequests.css */
 .friend-requests-container {
-    max-width: 600px;
-    margin: auto;
-    padding: 20px;
-    border: 1px solid #e0e0e0;
-    border-radius: 10px;
-    background-color: #f0f8ff;
-  }
-  
-  .friend-request-card {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px;
-    background-color: #ffffff;
-    border: 1px solid #d1e0e0;
-    border-radius: 8px;
-    margin-bottom: 10px;
-    transition: background-color 0.3s ease;
-  }
-  
-  .friend-request-card:hover {
-    background-color: #e6f7ff;
-  }
-  
-  .friend-request-username {
-    font-size: 16px;
-    color: #007bff;
-  }
-  
+  max-width: 600px;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  background-color: #f0f8ff;
+}
+
+.friend-request-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  background-color: #ffffff;
+  border: 1px solid #d1e0e0;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.friend-request-card:hover {
+  background-color: #e6f7ff;
+}
+
+.friend-request-username {
+  font-size: 16px;
+  color: #007bff;
+}

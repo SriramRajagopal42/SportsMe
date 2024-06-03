@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import "./FriendsList.css";
 
 const FriendsList = ({ userId }) => {
   const [friends, setFriends] = useState([]);
