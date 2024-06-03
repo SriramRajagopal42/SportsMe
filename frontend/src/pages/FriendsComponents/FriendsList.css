@@ -1,0 +1,33 @@
+/* FriendsList.css */
+.friends-list-container {
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #333;
+    border-radius: 10px;
+    background-color: #1c1c1c;
+  }
+  
+  .friends-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .friend-item {
+    padding: 10px;
+    background-color: #2a2a2a;
+    border: 1px solid #333;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .friend-item:hover {
+    background-color: #333;
+  }
+  
+  .friend-username {
+    font-size: 16px;
+    color: #1aac83;
+  }
+  

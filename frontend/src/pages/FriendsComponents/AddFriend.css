@@ -1,36 +1,48 @@
+/* AddFriend.css */
 .user-list {
     display: flex;
     flex-direction: column;
-    gap: 10px; 
+    gap: 10px;
     padding: 20px;
     margin: auto;
-}
-
-.user-card {
+    max-width: 600px;
+    border: 1px solid #333;
+    border-radius: 10px;
+    background-color: #1c1c1c;
+  }
+  
+  .user-card {
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 10px;
-    background-color: #f9f9f9; 
-    border: 1px solid #ddd; 
+    background-color: #2a2a2a;
+    border: 1px solid #333;
     border-radius: 8px;
-}
-
-.username {
+    transition: background-color 0.3s ease;
+  }
+  
+  .user-card:hover {
+    background-color: #333;
+  }
+  
+  .username {
     font-size: 16px;
-    color: #333; 
-}
-
-.add-friend-btn {
+    color: #1aac83;
+  }
+  
+  .add-friend-btn {
     padding: 6px 12px;
     font-size: 14px;
     color: white;
-    background-color: #007bff;
+    background-color: #1aac83;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-}
-
-.add-friend-btn:hover {
-    background-color: #0056b3;
-}
+    transition: background-color 0.3s ease;
+  }
+  
+  .add-friend-btn:hover {
+    background-color: #148a67;
+  }
+  
