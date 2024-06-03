@@ -9,27 +9,37 @@ const AddFriend = ({ userId }) => {
   const [allUsers, setAllUsers] = useState([]);
 
   useEffect(()=> {
-    setFilteredUsers(allUsers.filter((user) => {
-          return user.username.toLowerCase().includes(friendId.toLowerCase());
+    setFilteredUsers(allUsers.filter((person) => {
+          return person.username.toLowerCase().includes(friendId.toLowerCase()) && !person.friend_requests.includes(user.id) && person._id !==user.id;
       }));
-  }, [friendId]);
+  }, [friendId, allUsers, user]);
+
+  const get_users = async() => {
+    try {
+        const users =  await axios.get('http://localhost:4000/api/user', {
+          headers: {
+            Authorization: `Bearer ${user.token}`
+          }
+        });
+
+        const user_info =  await axios.get('http://localhost:4000/api/user/' + user.id, {
+              headers: {
+                Authorization: `Bearer ${user.token}`
+              }
+            });
+        setFilteredUsers(users.data);
+        setAllUsers(users.data);
+        
+    } catch(err) {
+      console.log(err);
+    }
+  }
+
+
 
   useEffect(() => {
-    const get_users = async() => {
-      try {
-          const users =  await axios.get('http://localhost:4000/api/user', {
-            headers: {
-              Authorization: `Bearer ${user.token}`
-            }
-          });
-          setAllUsers(users.data);
-          setFilteredUsers(users.data);
-      } catch(err) {
-        console.log(err);
-      }
-    }
     get_users();
-  }, [user])
+  }, []);
 
   const handleAddFriend = async (friend_id) => {
     try {
@@ -44,6 +54,8 @@ const AddFriend = ({ userId }) => {
         }
       }
     );
+      await get_users();
+      setFriendId("");
       alert('Friend added successfully');
     } catch (err) {
       console.error('Error adding friend', err);
