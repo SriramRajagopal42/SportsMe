@@ -6,9 +6,9 @@
     padding: 20px;
     margin: auto;
     max-width: 600px;
-    border: 1px solid #e0e0e0;
+    border: 1px solid #333;
     border-radius: 10px;
-    background-color: #f0f8ff;
+    background-color: #1c1c1c;
   }
   
   .user-card {
@@ -16,26 +16,26 @@
     align-items: center;
     justify-content: space-between;
     padding: 10px;
-    background-color: #ffffff;
-    border: 1px solid #d1e0e0;
+    background-color: #2a2a2a;
+    border: 1px solid #333;
     border-radius: 8px;
     transition: background-color 0.3s ease;
   }
   
   .user-card:hover {
-    background-color: #e6f7ff;
+    background-color: #333;
   }
   
   .username {
     font-size: 16px;
-    color: #007bff;
+    color: #1aac83;
   }
   
   .add-friend-btn {
     padding: 6px 12px;
     font-size: 14px;
     color: white;
-    background-color: #007bff;
+    background-color: #1aac83;
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -43,6 +43,6 @@
   }
   
   .add-friend-btn:hover {
-    background-color: #0056b3;
+    background-color: #148a67;
   }
   
