@@ -3,24 +3,30 @@
     max-width: 600px;
     margin: auto;
     padding: 20px;
-    border: 1px solid #e0e0e0;
+    border: 1px solid #333;
     border-radius: 10px;
-    background-color: #f0f8ff;
+    background-color: #1c1c1c;
   }
   
   .remove-friend-input {
     width: 80%;
     padding: 8px;
     margin-bottom: 10px;
-    border: 1px solid #d1e0e0;
+    border: 1px solid #333;
     border-radius: 5px;
+    background-color: #2a2a2a;
+    color: #1aac83;
+  }
+  
+  .remove-friend-input::placeholder {
+    color: #888;
   }
   
   .remove-friend-button {
     padding: 8px 16px;
     font-size: 14px;
     color: white;
-    background-color: #ff4d4d;
+    background-color: #1aac83;
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -28,6 +34,6 @@
   }
   
   .remove-friend-button:hover {
-    background-color: #cc0000;
+    background-color: #148a67;
   }
   
