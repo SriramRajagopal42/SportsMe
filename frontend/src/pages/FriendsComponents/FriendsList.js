@@ -1,22 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import "./FriendsList.css";
+import { useFriendContext } from '../../hooks/useFriendsContext';
 
 const FriendsList = ({ userId }) => {
-  const [friends, setFriends] = useState([]);
+  const {friends} = useFriendContext();
 
-  useEffect(() => {
-    const fetchFriends = async () => {
-      try {
-        const response = await axios.get(`/api/friends/${userId}`);
-        setFriends(response.data);
-      } catch (err) {
-        console.error('Error fetching friends', err);
-      }
-    };
+  // useEffect(() => {
+  //   const fetchFriends = async () => {
+  //     try {
+  //       const response = await axios.get(`/api/friends/${userId}`);
+  //       setFriends(response.data);
+  //     } catch (err) {
+  //       console.error('Error fetching friends', err);
+  //     }
+  //   };
 
-    fetchFriends();
-  }, [userId]);
+  //   fetchFriends();
+  // }, [userId]);
 
   return (
     <div>

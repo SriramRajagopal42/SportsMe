@@ -1,45 +1,44 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useAuthContext } from '../../hooks/useAuthContext';
+import { useFriendContext } from '../../hooks/useFriendsContext';
 import "./AddFriend.css";
 const AddFriend = ({ userId }) => {
   const [friendId, setFriendId] = useState('');
   const [filtered_users, setFilteredUsers] = useState([]);
   const {user} = useAuthContext();
-  const [allUsers, setAllUsers] = useState([]);
+  const {other_people, get_users } = useFriendContext();
 
   useEffect(()=> {
-    setFilteredUsers(allUsers.filter((person) => {
-          return person.username.toLowerCase().includes(friendId.toLowerCase()) && !person.friend_requests.includes(user.id) && person._id !==user.id;
+    setFilteredUsers(other_people.filter((person) => {
+          return person.username.toLowerCase().includes(friendId.toLowerCase());
       }));
-  }, [friendId, allUsers, user]);
+  }, [friendId, other_people]);
 
-  const get_users = async() => {
-    try {
-        const users =  await axios.get('http://localhost:4000/api/user', {
-          headers: {
-            Authorization: `Bearer ${user.token}`
-          }
-        });
+  // const get_users = async() => {
+  //   try {
+  //       const users =  await axios.get('http://localhost:4000/api/user', {
+  //         headers: {
+  //           Authorization: `Bearer ${user.token}`
+  //         }
+  //       });
 
-        const user_info =  await axios.get('http://localhost:4000/api/user/' + user.id, {
-              headers: {
-                Authorization: `Bearer ${user.token}`
-              }
-            });
-        setFilteredUsers(users.data);
-        setAllUsers(users.data);
+  //       const user_info =  await axios.get('http://localhost:4000/api/user/' + user.id, {
+  //             headers: {
+  //               Authorization: `Bearer ${user.token}`
+  //             }
+  //           });
+  //       setFilteredUsers(users.data);
+  //       setAllUsers(users.data);
         
-    } catch(err) {
-      console.log(err);
-    }
-  }
+  //   } catch(err) {
+  //     console.log(err);
+  //   }
+  // }
 
-
-
-  useEffect(() => {
-    get_users();
-  }, []);
+  // useEffect(() => {
+  //   get_users();
+  // }, []);
 
   const handleAddFriend = async (friend_id) => {
     try {
