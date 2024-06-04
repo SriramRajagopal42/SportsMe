@@ -140,13 +140,15 @@ const request_friend = async(req, res) => {
 // make a certain user accept a friend request
 const add_friend = async(req, res) => {
     const id = req.params.id;
-    const friend_to_add = req.body.friend;
+    const friend_to_add = req.body.friend.friend_id;
+    console.log(friend_to_add);
     if (!mongoose.Types.ObjectId.isValid(id)) {
         return res.status(404).json({error: "No such user"})
     }
     try {
         const requester = await User.findById(friend_to_add)
-        
+        //remove friend from list of friend_requests
+        const new_user = await User.findByIdAndUpdate(id, {$pull: {friend_requests: friend_to_add}}, {new : true, runValidators: true});
         var mailOptions = {
             from: process.env.GMAIL,
             to: requester.email,
@@ -157,8 +159,7 @@ const add_friend = async(req, res) => {
         transporter.sendMail(mailOptions)
         
         await User.findByIdAndUpdate(id, {$addToSet: {friends: friend_to_add}}, {new : true, runValidators: true});
-        //remove friend from list of friend_requests
-        const new_user = await User.findByIdAndUpdate(id, {$pull: {friend_requests: friend_to_add}}, {new : true, runValidators: true});
+        
 
         //the friend who originally issues the friend request
         await User.findByIdAndUpdate(friend_to_add, {$addToSet: {friends: id}}, {new : true, runValidators: true});
