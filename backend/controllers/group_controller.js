@@ -168,20 +168,28 @@ const leave_group = async(req, res) => {
         return res.status(404).json({error: "No such group"});
     }
 
-    const creator = await User.findById(group.creator_id);
-    const member = await User.findById(member_id);
+    if (group.member_ids.length === 0) {
+        // Delete the group if it's empty
+        await Group.deleteOne({_id: id});
 
-    var mailOptions = {
-        from: process.env.GMAIL,
-        to: creator.email,
-        subject: 'Group member has left',
-        text: 'Hello ${creator.username}, ${member.username} has left your ${group.sport} group because he hates your fucking guts. Please jump off a cliff!'
-        //MAYBE CHANGE THIS LOL
-    };
+        res.status(200).json({message: "Group deleted as it has no more members"});
+    } else {
 
-    transporter.sendMail(mailOptions);
+        const creator = await User.findById(group.creator_id);
+        const member = await User.findById(member_id);
 
-    res.status(200).json(group);
+        var mailOptions = {
+            from: process.env.GMAIL,
+            to: creator.email,
+            subject: 'Group member has left',
+            text: 'Hello ${creator.username}, ${member.username} has left your ${group.sport} group because he hates your fucking guts. Please jump off a cliff!'
+            //MAYBE CHANGE THIS LOL
+        };
+
+        transporter.sendMail(mailOptions);
+
+        res.status(200).json(group);
+    }
 }
 
 
