@@ -21,7 +21,8 @@ const Home = () => {
 
     useEffect(() => {
         const fetch_groups = async() => {
-                const response = await fetch('http://localhost:4000/api/groups/filtered', {
+            
+            const response = await fetch('http://localhost:4000/api/groups/filtered', {
                 method: 'POST',
 
                 //This line does the filtering
@@ -37,6 +38,7 @@ const Home = () => {
             if (response.ok) {
                 dispatch({type: 'SET_GROUPS', payload: json})
             }
+            
 
         }
 

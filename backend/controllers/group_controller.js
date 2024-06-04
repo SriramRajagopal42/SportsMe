@@ -67,12 +67,13 @@ const create_group = async(req, res) => {
         return res.status(400).json({error: 'Please fill in all of the fields', empty_fields})
     } 
 
+
     try {
         //add doc to db
-        console.log(req);
         const user_id = req.user._id
-        const users = req.username
-        const group = await Group.create({sport, date, time, place, group_size, creator_id: user_id, member_ids: [user_id], usernames: [users]})
+        const users = req.user.username
+        const member = await User.findById(user_id)
+        const group = await Group.create({sport, date, time, place, group_size, creator_id: user_id, member_ids: [user_id], usernames: [member.username]})
         res.status(200).json(group)
     } catch (error) {
         res.status(400).json({error: error.message})
@@ -106,13 +107,21 @@ const join_group = async(req, res) => {
         return res.status(404).json({error: "No such group"})
     }
 
+
     const group_size = await Group.findById(id).select('group_size')
+    const user = await User.findById(member_id)
+    console.log(user.username)
+
 
     const group = await Group.findOneAndUpdate({_id: id}, {
         $push: {
             member_ids: {
                 $each: [member_id],
-                $slice: group_size
+                $slice: group_size.groups_size
+            },
+            usernames: {
+                $each: [user.username],
+                $slice: group_size.groups_size
             }
         }
     })
@@ -121,12 +130,13 @@ const join_group = async(req, res) => {
         return res.status(404).json({error: "No such group"})
     }
 
+ 
     const creator = await User.findById(group.creator_id)
     const member = await User.findById(member_id)
 
     var mailOptions = {
         from: process.env.GMAIL,
-        to: email,
+        to: creator.email,
         subject: 'New group member!',
         text: `Hello ${creator.username}, ${member.username} just joined your ${group.sport} group, say hello!`
     }

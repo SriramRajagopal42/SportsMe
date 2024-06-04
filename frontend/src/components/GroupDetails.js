@@ -1,4 +1,5 @@
 /* eslint-disable react/react-in-jsx-scope */
+import React, { useState, useEffect } from 'react';
 import {useGroupsContext} from '../hooks/useGroupsContext'
 import { useAuthContext } from '../hooks/useAuthContext'
 //date fns
@@ -9,6 +10,11 @@ const GroupDetails = ({group}) => {
 
     const {dispatch} = useGroupsContext()
     const {user} = useAuthContext()
+
+
+    
+
+
     const handleClick = async() => {
         if (!user) {
             return
@@ -21,7 +27,6 @@ const GroupDetails = ({group}) => {
             }
         })
 
-        console.log(response);
 
         const json = await response.json()
 
@@ -29,6 +34,27 @@ const GroupDetails = ({group}) => {
             dispatch({type: "DELETE_GROUP", payload: json})
         }
     }
+
+    const handleButton = async() => {
+        console.log("testing");
+        const response = await fetch('http://localhost:4000/api/groups/join/' + group._id, {
+            method: 'PATCH',
+            headers: {
+                'Authorization': `Bearer ${user.token}`
+            }
+        })
+        // console.log(response.json);
+        // console.log(response);
+
+        const json = await response.json()
+
+
+        if (response.ok) {
+            dispatch({type: "SET_GROUP", payload: json})
+        }
+    }
+
+
 
     return (
         <div className="workout-details">
@@ -41,6 +67,7 @@ const GroupDetails = ({group}) => {
             <p>{formatDistanceToNow(new Date(group.createdAt), {addSuffix: true})}</p>
             <hr />
             <Comments comments={group.comments} group_id={group._id}/>
+            {!group.member_ids.includes(user.id) && <button onClick={handleButton}>Join Group</button>}
             <span className="material-symbols-outlined" onClick={handleClick}>delete</span>
         </div>
     )
