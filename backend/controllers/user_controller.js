@@ -2,6 +2,7 @@ const User = require('../models/user_model')
 const mongoose = require('mongoose')
 const jwt = require('jsonwebtoken')
 var nodemailer = require('nodemailer');
+const mongoose = require('mongoose');
 
 var transporter = nodemailer.createTransport({
   service: 'gmail',
@@ -15,14 +16,14 @@ const createToken = (_id) => {
     return jwt.sign({_id}, process.env.SECRET, {expiresIn: '3d'})
 }
 
-//login user
+// login user
 const login_user = async (req, res) => {
     const {email_or_username, password} = req.body
 
     try {
         const user = await User.login(email_or_username, password)
 
-        //create a token
+        // create a token
         const token = createToken(user._id)
 
         res.status(200).json({username: user.username, id: user._id, token})
@@ -31,14 +32,14 @@ const login_user = async (req, res) => {
     }
 }
 
-//signup user
+// signup user
 const signup_user = async (req, res) => {
     const {username, email, password} = req.body
 
     try {
         const user = await User.signup(username, email, password)
 
-        //create a token
+        // create a token
         const token = createToken(user._id)
         
         var mailOptions = {
@@ -86,10 +87,10 @@ const get_filtered_users = async(req, res) => {
 
     try {
         const groups = await User.find({...req.body});
-        res.status(400).json(groups)
+        res.status(200).json(groups)
     }
     catch (error) {
-        res.status(200).json({error: error.message})
+        res.status(400).json({error: error.message})
     }
 }
 
@@ -101,26 +102,26 @@ const update_user = async(req, res) => {
     }
     try {
         const new_user = await User.findOneAndUpdate({_id: id}, {...req.body}, {new : true, runValidators: true});
-        res.status(400).json(new_user);
+        res.status(200).json(new_user);
 
     }
     catch (error) {
-        res.status(200).json({error: error.message});
+        res.status(400).json({error: error.message});
     }
 }
 
 // make certain user request a friend
 const request_friend = async(req, res) => {
     const id = req.params.id;
-    const req_id = req.body._id
+    const req_id = req.body._id.friend_id;
     if (!mongoose.Types.ObjectId.isValid(id)) {
         return res.status(404).json({error: "No such user"})
     }
     try {
         //addToSet will ensure all friend requests are unique, i.e no duplicates.
         const new_user = await User.findByIdAndUpdate(req_id, {$addToSet: {friend_requests: id}}, {new : true, runValidators: true});
-        const requester = await User.findById(friend_requests)
-        
+        const requester = await User.findById(id);
+
         var mailOptions = {
             from: process.env.GMAIL,
             to: new_user.email,
@@ -130,23 +131,25 @@ const request_friend = async(req, res) => {
   
         transporter.sendMail(mailOptions)
 
-        res.status(400).json(new_user);
+        res.status(200).json(new_user);
     }
     catch (error) {
-        res.status(200).json({error: error.message});
+        res.status(400).json({error: error.message});
     }
 }
 
 // make a certain user accept a friend request
 const add_friend = async(req, res) => {
     const id = req.params.id;
-    const friend_to_add = req.body.friend;
+    const friend_to_add = req.body.friend.friend_id;
+    console.log(friend_to_add);
     if (!mongoose.Types.ObjectId.isValid(id)) {
         return res.status(404).json({error: "No such user"})
     }
     try {
         const requester = await User.findById(friend_to_add)
-        
+        //remove friend from list of friend_requests
+        const new_user = await User.findByIdAndUpdate(id, {$pull: {friend_requests: friend_to_add}}, {new : true, runValidators: true});
         var mailOptions = {
             from: process.env.GMAIL,
             to: requester.email,
@@ -157,16 +160,15 @@ const add_friend = async(req, res) => {
         transporter.sendMail(mailOptions)
         
         await User.findByIdAndUpdate(id, {$addToSet: {friends: friend_to_add}}, {new : true, runValidators: true});
-        //remove friend from list of friend_requests
-        const new_user = await User.findByIdAndUpdate(id, {$pull: {friend_requests: friend_to_add}}, {new : true, runValidators: true});
+        
 
         //the friend who originally issues the friend request
         await User.findByIdAndUpdate(friend_to_add, {$addToSet: {friends: id}}, {new : true, runValidators: true});
         await User.findByIdAndUpdate(friend_to_add, {$pull: {friend_requests: id}}, {new : true, runValidators: true});
-        res.status(400).json(new_user);
+        res.status(200).json(new_user);
     }
     catch (error) {
-        res.status(200).json({error: error.message});
+        res.status(400).json({error: error.message});
     }
 }
 

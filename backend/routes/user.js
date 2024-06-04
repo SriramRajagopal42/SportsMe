@@ -16,11 +16,9 @@ const requireAuth = require('../middleware/requireAuth')
 const router = express.Router()
 
 // login route
-
 router.post('/login', login_user)
 
 // signup route
-
 router.post('/signup', signup_user)
 
 //require auth for some group routes

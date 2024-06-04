@@ -1,10 +1,11 @@
 import React from 'react';
-import {useEffect,} from 'react'
-import {useGroupsContext} from '../hooks/useGroupsContext'
-import {useAuthContext} from '../hooks/useAuthContext'
+import {useEffect,} from 'react';
+import {useGroupsContext} from '../hooks/useGroupsContext';
+import {useAuthContext} from '../hooks/useAuthContext';
+import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 
-//components
+// Components
 import GroupDetails from '../components/GroupDetails'
 import GroupForm from '../components/GroupForm'
 

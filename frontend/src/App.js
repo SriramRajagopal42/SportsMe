@@ -6,8 +6,10 @@ import { useAuthContext } from './hooks/useAuthContext';
 import Home from './pages/Home'
 import Login from './pages/Login';
 import Signup from './pages/Signup';
+import UserProfile from './pages/UserProfile/UserProfile'
 import GroupsList from './pages/GroupsList';
 import Navbar from './components/Navbar';
+import FriendsPage from './pages/FriendsPage';
 
 function App() {
   const {user} = useAuthContext()
@@ -31,8 +33,16 @@ function App() {
               element = {!user ? <Signup /> : <Navigate to={'/'} />}
             />
             <Route 
+              path="/profile" 
+              element= {user ? <UserProfile /> : <Navigate to={'/'} />}
+            />
+            <Route 
               path = '/groupslist'
               element = {user ? <GroupsList /> : <Navigate to={'/'} />}
+            />
+            <Route 
+              path='/friends'
+              element={user ? <FriendsPage userId={user._id} /> : <Navigate to={'/'} />} // Use FriendsPage correctly
             />
           </Routes>
         </div>
