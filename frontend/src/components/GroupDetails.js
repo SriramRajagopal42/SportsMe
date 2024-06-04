@@ -34,7 +34,7 @@ const GroupDetails = ({group}) => {
         }
     }
 
-    const handleButton = async() => {
+    const handleJoin = async() => {
         console.log("testing");
         const response = await fetch('http://localhost:4000/api/groups/join/' + group._id, {
             method: 'PATCH',
@@ -44,6 +44,24 @@ const GroupDetails = ({group}) => {
         })
         // console.log(response.json);
         // console.log(response);
+
+        const json = await response.json()
+
+
+        if (response.ok) {
+            dispatch({type: "SET_GROUP", payload: json})
+        }
+    }
+
+    const handleLeave = async() => {
+        console.log("testing");
+        const response = await fetch('http://localhost:4000/api/groups/leave/' + group._id, {
+            method: 'PATCH',
+            headers: {
+                'Authorization': `Bearer ${user.token}`
+            }
+        })
+
 
         const json = await response.json()
 
@@ -66,7 +84,8 @@ const GroupDetails = ({group}) => {
             <p>{formatDistanceToNow(new Date(group.createdAt), {addSuffix: true})}</p>
             <hr />
             <Comments comments={group.comments} group_id={group._id}/>
-            {!group.member_ids.includes(user.id) && <button onClick={handleButton}>Join Group</button>}
+            {!group.member_ids.includes(user.id) && <button onClick={handleJoin}>Join Group</button>}
+            {group.member_ids.includes(user.id) && <button onClick={handleLeave}>Leave Group</button>}
             <span className="material-symbols-outlined" onClick={handleClick}>delete</span>
         </div>
     )

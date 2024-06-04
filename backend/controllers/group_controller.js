@@ -147,6 +147,44 @@ const join_group = async(req, res) => {
 
 }
 
+
+// Leave a group
+const leave_group = async(req, res) => {
+    const id = req.params.id;
+    const member_id = req.user._id;
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).json({error: "No such group"});
+    }
+
+    const group = await Group.findOneAndUpdate({_id: id}, {
+        $pull: {
+            member_ids: member_id,
+            usernames: (await User.findById(member_id)).username
+        }
+    }, { new: true });
+
+    if (!group) {
+        return res.status(404).json({error: "No such group"});
+    }
+
+    const creator = await User.findById(group.creator_id);
+    const member = await User.findById(member_id);
+
+    var mailOptions = {
+        from: process.env.GMAIL,
+        to: creator.email,
+        subject: 'Group member has left',
+        text: 'Hello ${creator.username}, ${member.username} has left your ${group.sport} group because he hates your fucking guts. Please jump off a cliff!'
+        //MAYBE CHANGE THIS LOL
+    };
+
+    transporter.sendMail(mailOptions);
+
+    res.status(200).json(group);
+}
+
+
 // update a workout
 const update_group = async(req, res) => {
     const id = req.params.id
@@ -216,6 +254,7 @@ module.exports = {
     delete_group,
     update_group,
     join_group,
+    leave_group,
     update_comments,
     get_all_members
 }
