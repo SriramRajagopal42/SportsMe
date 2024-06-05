@@ -20,7 +20,7 @@ const UserProfile = () => {
     skill_level: ''
   });
 
-  useEffect(() => {
+  useEffect(() => { 
     if (user) {
       const fetchUserData = async () => {
         try {
