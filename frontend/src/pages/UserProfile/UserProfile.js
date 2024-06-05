@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import { useAuthContext } from '../../hooks/useAuthContext';
 import './UserProfile.css';
 
 const UserProfile = () => {
+  const { ID } = useParams();
   const { user } = useAuthContext();
   const [userData, setUserData] = useState(null);
   const [error, setError] = useState(null);
@@ -24,7 +26,7 @@ const UserProfile = () => {
     if (user) {
       const fetchUserData = async () => {
         try {
-          const response = await fetch(`http://localhost:4000/api/user/${user.id}`, {
+          const response = await fetch(`http://localhost:4000/api/user/${ID}`, {
             headers: {
               'Authorization': `Bearer ${user.token}`
             }
@@ -51,7 +53,7 @@ const UserProfile = () => {
       };
       fetchUserData();
     }
-  }, [user]);
+  }, [user, ID]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;

@@ -28,7 +28,7 @@ const Navbar = () => {
                         <Link to ="/groupslist">
                             <button className="button">Search For Groups</button>
                         </Link>
-                        <Link to ="/profile">
+                        <Link to ={"/profile/" + user.id}>
                             <button className="button">My Profile</button>
                         </Link>
                         <Link to="/friends">
