@@ -40,7 +40,7 @@ const user_schema = new Schema({
         type: String,
     },
     year: {
-        type: Number,
+        type: String,
     },
     major: {
         type: String,

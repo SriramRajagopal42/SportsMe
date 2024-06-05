@@ -114,23 +114,32 @@ const UserProfile = () => {
               <div className="form-group">
                 <label>
                   Gender:
-                  <input
-                    type="text"
+                  <select
                     name="gender"
                     value={formData.gender}
                     onChange={handleInputChange}
-                  />
+                  >
+                    <option value="">Prefer not to say</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
+                  </select>
                 </label>
               </div>
               <div className="form-group">
                 <label>
                   Pronouns:
-                  <input
-                    type="text"
+                  <select
                     name="pronouns"
                     value={formData.pronouns}
                     onChange={handleInputChange}
-                  />
+                  >
+                    <option value="">Prefer not to say</option>
+                    <option value="He/Him">He/Him</option>
+                    <option value="She/Her">She/Her</option>
+                    <option value="They/Them">They/Them</option>
+                    <option value="Other">Other</option>
+                  </select>
                 </label>
               </div>
               <div className="form-group">
@@ -147,12 +156,16 @@ const UserProfile = () => {
               <div className="form-group">
                 <label>
                   Year:
-                  <input
-                    type="number"
+                  <select 
                     name="year"
                     value={formData.year}
                     onChange={handleInputChange}
-                  />
+                  >
+                    <option value="Freshman">Freshman</option>
+                    <option value="Sophomore">Sophomore</option>
+                    <option value="Junior">Junior</option>
+                    <option value="Senior">Senior</option>
+                  </select>
                 </label>
               </div>
               <div className="form-group">
