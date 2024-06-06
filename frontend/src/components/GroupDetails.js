@@ -35,6 +35,10 @@ const GroupDetails = ({group}) => {
     }
 
     const handleJoin = async() => {
+        if (!user) {
+            return
+        }
+
         console.log("testing");
         const response = await fetch('http://localhost:4000/api/groups/join/' + group._id, {
             method: 'PATCH',
@@ -49,11 +53,15 @@ const GroupDetails = ({group}) => {
 
 
         if (response.ok) {
-            dispatch({type: "SET_GROUP", payload: json})
+            dispatch({type: "UPDATE_GROUP", payload: json})
         }
     }
 
     const handleLeave = async() => {
+        if (!user) {
+            return
+        }
+        
         console.log("testing");
         const response = await fetch('http://localhost:4000/api/groups/leave/' + group._id, {
             method: 'PATCH',
@@ -67,7 +75,7 @@ const GroupDetails = ({group}) => {
 
 
         if (response.ok) {
-            dispatch({type: "SET_GROUP", payload: json})
+            dispatch({type: "UPDATE_GROUP", payload: json})
         }
     }
 

@@ -117,14 +117,14 @@ const join_group = async(req, res) => {
         $push: {
             member_ids: {
                 $each: [member_id],
-                $slice: group_size.groups_size
+                $slice: group_size.group_size
             },
             usernames: {
                 $each: [user.username],
-                $slice: group_size.groups_size
+                $slice: group_size.group_size
             }
         }
-    })
+    }, { new: true })
 
     if (!group) {
         return res.status(404).json({error: "No such group"})
