@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useAuthContext } from '../../hooks/useAuthContext';
 import { useFriendContext } from '../../hooks/useFriendsContext';
-import "./AddFriend.css";
+import "./Friends.css";
 const AddFriend = ({ userId }) => {
   const [friendId, setFriendId] = useState('');
   const [filtered_users, setFilteredUsers] = useState([]);

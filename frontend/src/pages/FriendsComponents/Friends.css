@@ -46,3 +46,13 @@
     background-color: #148a67;
   }
   
+.remove-friend-btn {
+  padding: 6px 12px;
+  font-size: 14px;
+  color: rgb(11, 0, 0);
+  background-color: #be1808;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}

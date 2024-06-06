@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import axios from 'axios';
-import "./FriendsList.css";
+import "./Friends.css";
 import { useFriendContext } from '../../hooks/useFriendsContext';
 import { useAuthContext } from '../../hooks/useAuthContext';
 
@@ -31,7 +31,7 @@ const FriendsList = ({ userId }) => {
           'Content-Type': 'application/json'
         }
       });
-      get_users();
+      await get_users();
       alert('Friend removed successfully');
     } catch (err) {
       console.error('Error removing friend', err);
@@ -42,17 +42,21 @@ const FriendsList = ({ userId }) => {
   return (
     <div>
       <h2>Friends List</h2>
-      <ul>
-        {friends.map(friend => (
-          <div>
-              <li key={friend._id}>{friend.username}</li>
-              <button onClick={() => {removeFriend(friend._id)}}>Remove Friend</button>
-          </div>
-
-        ))}
-      </ul>
+      <div className="user-list">
+        {friends.map((friend, index)=> {
+          return (
+            <div key={index} className="user-card">
+                <span className="username" >{friend.username}</span>
+                <button className="remove-friend-btn" onClick={() => {removeFriend(friend._id)}}>Remove Friend</button>
+            </div>
+          );
+       })}
+</div>
     </div>
   );
 };
+
+
+
 
 export default FriendsList;
