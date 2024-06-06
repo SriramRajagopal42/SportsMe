@@ -1,5 +1,5 @@
 /* eslint-disable react/react-in-jsx-scope */
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import {useGroupsContext} from '../hooks/useGroupsContext'
 import { useAuthContext } from '../hooks/useAuthContext'
 import { Link } from 'react-router-dom';
@@ -11,10 +11,6 @@ const GroupDetails = ({group}) => {
 
     const {dispatch} = useGroupsContext()
     const {user} = useAuthContext()
-
-
-    
-
 
     const handleClick = async() => {
         if (!user) {
@@ -47,11 +43,8 @@ const GroupDetails = ({group}) => {
                 'Authorization': `Bearer ${user.token}`
             }
         })
-        // console.log(response.json);
-        // console.log(response);
 
         const json = await response.json()
-
 
         if (response.ok) {
             dispatch({type: "UPDATE_GROUP", payload: json})
@@ -71,9 +64,7 @@ const GroupDetails = ({group}) => {
             }
         })
 
-
         const json = await response.json()
-
 
         if (response.ok) {
             dispatch({type: "UPDATE_GROUP", payload: json})

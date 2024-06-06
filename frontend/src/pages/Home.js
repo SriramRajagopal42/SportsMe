@@ -2,12 +2,12 @@ import React from 'react';
 import {useEffect,} from 'react';
 import {useGroupsContext} from '../hooks/useGroupsContext';
 import {useAuthContext} from '../hooks/useAuthContext';
-import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 
 // Components
 import GroupDetails from '../components/GroupDetails'
 import GroupForm from '../components/GroupForm'
+import FilterBar from '../components/FilterBar';
 
 const Home = () => {
 
@@ -48,13 +48,11 @@ const Home = () => {
         }
     }, [dispatch, user])
 
-
-
-
-
+    
     return (
         <div className="home">
             <div className='workouts'>
+                <FilterBar type={"home"}/>
                 <h1>Current Groups</h1>
                 {groups && groups.map((group) => (
                     <GroupDetails key={group._id} group={group} />
