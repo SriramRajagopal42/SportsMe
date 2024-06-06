@@ -3,6 +3,7 @@ import axios from 'axios';
 import "./Friends.css";
 import { useFriendContext } from '../../hooks/useFriendsContext';
 import { useAuthContext } from '../../hooks/useAuthContext';
+import { Link } from 'react-router-dom';
 
 const FriendsList = ({ userId }) => {
   const {friends} = useFriendContext();
@@ -46,7 +47,7 @@ const FriendsList = ({ userId }) => {
         {friends.map((friend, index)=> {
           return (
             <div key={index} className="user-card">
-                <span className="username" >{friend.username}</span>
+                <span className="username" ><Link to={`/profile/${friend._id}`} style={{ textDecoration: 'none', color: 'white' }} >  {friend.username} </Link></span>
                 <button className="remove-friend-btn" onClick={() => {removeFriend(friend._id)}}>Remove Friend</button>
             </div>
           );

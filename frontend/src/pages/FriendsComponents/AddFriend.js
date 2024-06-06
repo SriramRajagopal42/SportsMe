@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useAuthContext } from '../../hooks/useAuthContext';
 import { useFriendContext } from '../../hooks/useFriendsContext';
+import { Link } from 'react-router-dom';
 import "./Friends.css";
 const AddFriend = ({ userId }) => {
   const [friendId, setFriendId] = useState('');
@@ -74,7 +75,7 @@ const AddFriend = ({ userId }) => {
             {filtered_users.map((filtered_user, index)=> {
           return (
             <div key={index} className="user-card">
-                <span className="username" >{filtered_user.username}</span>
+                <span className="username" ><Link to={`/profile/${filtered_user._id}`} style={{ textDecoration: 'none', color: 'white' }} >  {filtered_user.username} </Link></span>
                 <button className="add-friend-btn" onClick={() => {handleAddFriend(filtered_user._id)}}>Add Friend</button>
             </div>
           );
