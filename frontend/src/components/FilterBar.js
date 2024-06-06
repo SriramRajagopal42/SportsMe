@@ -1,7 +1,7 @@
 import { useState, useRef } from "react"
 import { useGroupsContext } from "../hooks/useGroupsContext"
 import { useAuthContext } from "../hooks/useAuthContext"
-
+import "./FilterBar.css";
 const FilterBar = ({type}) => {
     const {dispatch} = useGroupsContext()
     const {user} = useAuthContext()
@@ -81,7 +81,7 @@ const FilterBar = ({type}) => {
 
     return (
         <div>
-            <button onClick={toggle} className="filter">Filter</button>
+            <button onClick={toggle} className="filter-button">Filter</button>
             <div className="content-parent"
             ref={contentRef} style={open ? { height: contentRef.current.scrollHeight +
             "px" } : { height: "0px" }}>
