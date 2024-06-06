@@ -32,8 +32,12 @@ function App() {
               path = '/signup'
               element = {!user ? <Signup /> : <Navigate to={'/'} />}
             />
-            <Route 
+            {/* <Route 
               path="/profile" 
+              element= {user ? <UserProfile memberID={user.id}/> : <Navigate to={'/'} />}
+            /> */}
+            <Route 
+              path="/profile/:ID" 
               element= {user ? <UserProfile /> : <Navigate to={'/'} />}
             />
             <Route 

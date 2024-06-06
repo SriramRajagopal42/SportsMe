@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import {useGroupsContext} from '../hooks/useGroupsContext'
 import { useAuthContext } from '../hooks/useAuthContext'
+import { Link } from 'react-router-dom';
 //date fns
 import formatDistanceToNow from 'date-fns/formatDistanceToNow'
 import Comments from './Comments/Comments'
@@ -84,7 +85,13 @@ const GroupDetails = ({group}) => {
     return (
         <div className="workout-details">
             <h4>{group.sport}</h4>
-            <p><strong>Members: </strong>{group.usernames.join(', ')}</p>
+            <p>
+            <strong>Members: </strong>
+                {group.usernames.map((username, index) => (
+                    <Link to={`/profile/${group.member_ids[index]}`} key={index} style={{ textDecoration: 'none', color: 'pink' }} >  {username}{index < group.usernames.length - 1 ?  ', ' : ''} </Link>
+
+                ))}
+            </p>
             <p><strong>Place: </strong>{group.place}</p>
             <p><strong>Date: </strong>{group.date}</p>
             <p><strong>Time: </strong>{group.time}</p>
