@@ -212,3 +212,29 @@ form.login {
   border-radius: 4px;
   color: #f0f0f0; /* Light text color */
 }
+
+/* Collapsible stuff */
+.content {
+  border: 2px solid var(--primary);
+  padding: 10px 20px;
+  border-radius: 4px;
+}
+  
+.content-parent {
+  height: 0px;
+  overflow: hidden;
+  transition: height ease 0.6s;
+}
+  
+.content-show {
+  height: 200px;
+}
+
+.filter {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 10px 20px;
+  /*display: flex;*/
+  align-items: center;
+  justify-content: space-between;
+}

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import axios from 'axios';
 import { useAuthContext } from '../../hooks/useAuthContext';
 import { useFriendContext } from '../../hooks/useFriendsContext';
