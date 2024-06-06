@@ -18,11 +18,11 @@ const UserProfile = () => {
     fav_sport: '',
     year: '',
     major: '',
-    height: '',
-    skill_level: ''
+    height: '60',
+    skill_level: 'Beginner'
   });
 
-  useEffect(() => { 
+  useEffect(() => {
     if (user) {
       const fetchUserData = async () => {
         try {
@@ -44,7 +44,7 @@ const UserProfile = () => {
             fav_sport: data.fav_sport || '',
             year: data.year || '',
             major: data.major || '',
-            height: data.height || '',
+            height: data.height || '60',
             skill_level: data.skill_level || ''
           });
         } catch (err) {
@@ -58,6 +58,10 @@ const UserProfile = () => {
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
+  };
+
+  const handleHeightChange = (e) => {
+    setFormData({ ...formData, height: e.target.value });
   };
 
   const handleFormSubmit = async (e) => {
@@ -81,6 +85,12 @@ const UserProfile = () => {
     } finally {
       setIsEditing(false);
     }
+  };
+
+  const formatHeight = (inches) => {
+    const feet = Math.floor(inches / 12);
+    const remainingInches = inches % 12;
+    return `${feet}'${remainingInches}"`;
   };
 
   return (
@@ -170,37 +180,31 @@ const UserProfile = () => {
                   </select>
                 </label>
               </div>
-              <div className="form-group">
+              <div className="form-group height-slider">
                 <label>
-                  Major:
+                  Height: <span className="height-display">{formatHeight(formData.height)}</span>
                   <input
-                    type="text"
-                    name="major"
-                    value={formData.major}
-                    onChange={handleInputChange}
-                  />
-                </label>
-              </div>
-              <div className="form-group">
-                <label>
-                  Height:
-                  <input
-                    type="number"
+                    type="range"
                     name="height"
+                    min="48"
+                    max="96"
                     value={formData.height}
-                    onChange={handleInputChange}
+                    onChange={handleHeightChange}
                   />
                 </label>
               </div>
               <div className="form-group">
                 <label>
-                  Skill Level:
-                  <input
-                    type="text"
+                  Year:
+                  <select 
                     name="skill_level"
                     value={formData.skill_level}
                     onChange={handleInputChange}
-                  />
+                  >
+                    <option value="Novice">Novice</option>
+                    <option value="Intermediate">Intermediate</option>
+                    <option value="Advanced">Advanced</option>
+                  </select>
                 </label>
               </div>
               <div className="form-actions">
@@ -217,7 +221,7 @@ const UserProfile = () => {
               <p><strong>Favorite Sport:</strong> {userData.fav_sport}</p>
               <p><strong>Year:</strong> {userData.year}</p>
               <p><strong>Major:</strong> {userData.major}</p>
-              <p><strong>Height:</strong> {userData.height}</p>
+              <p><strong>Height:</strong> {formatHeight(userData.height)}</p>
               <p><strong>Skill Level:</strong> {userData.skill_level}</p>
               {ID === user.id && <button onClick={() => setIsEditing(true)}>Edit</button>}
             </div>
