@@ -206,7 +206,7 @@ const UserProfile = () => {
               <p><strong>Major:</strong> {userData.major}</p>
               <p><strong>Height:</strong> {userData.height}</p>
               <p><strong>Skill Level:</strong> {userData.skill_level}</p>
-              <button onClick={() => setIsEditing(true)}>Edit</button>
+              {ID === user.id && <button onClick={() => setIsEditing(true)}>Edit</button>}
             </div>
           )}
         </>
