@@ -41,17 +41,22 @@ const FriendRequests = () => {
 //   }, [user]);
 // console.log(friend_requests[0]._id);
   const handleAcceptFriendButton = async(friend_id) => {
-    
-    await axios.patch('http://localhost:4000/api/user/friends/accept/' + user.id, {
-        friend: {friend_id}
-  },
-  {
-    headers: {
-      Authorization: `Bearer ${user.token}`,
-      'Content-Type': 'application/json'
+    try {
+        await axios.patch('http://localhost:4000/api/user/friends/accept/' + user.id, {
+            friend: {friend_id}
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+          'Content-Type': 'application/json'
+        }
+      });
+        await get_users();
     }
-  });
-    await get_users();
+    catch(error) {
+        console.log(error);
+    }
+
   }
 
   return (
