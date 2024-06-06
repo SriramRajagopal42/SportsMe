@@ -28,7 +28,7 @@ const Navbar = () => {
                         <Link to="/friends">
                             <button className="button">Friends</button>
                         </Link>
-                        <Link to ="/profile">
+                        <Link to ={"/profile/" + user.id}>
                             <button className="button">My Profile</button>
                         </Link>
                         <button className="button" onClick={handleClick}>Log out</button>
