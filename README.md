@@ -1,4 +1,3 @@
-# SportsMe
 
 SportsMe is a full stack web application connecting users to sports! This app will allow users to effortlessly create and join groups looking for games in a variety of different sports, providing an easy way for users to find other people to play sports with and line up their schedules. 
 
@@ -13,7 +12,6 @@ RSVP to scheduled events
 If users would like to continue playing with one another after their first meetup, they can RSVP to a scheduled event (daily, weekly, etc.).
 Automatically sends confirmation and reminders to users via email
 
-To address security issues with our app, users must create an account (username and password) when opening the app for the first time. Users will also be required to provide additional information such as their phone number, email, year, and gender.
 Technologies
 Javascript 
 Node.js 
@@ -56,5 +54,4 @@ npm start
 The frontend will be available on http://localhost:3000, which should appear in your browser automatically.
 
 Authors: SportsMe was created by Savio Joseph, Arnav Kushwah, Sriram Rajagopal, Sailesh Gunaseelan, and Pranav Akella for as a project for CS 35L.
-
 
