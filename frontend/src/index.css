@@ -1,32 +1,45 @@
-/* google font */
+/* Import Google Font */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;800&family=VT323&display=swap');
 
-/* layout */
+/* Global Styles */
 :root {
-  --primary: #1aac83;
-  --error: #e7195a;
+  --primary: #1aac83; /* Primary color */
+  --error: #e7195a; /* Error color */
 }
+
 body {
   background: #1c1c1c; /* Dark background */
   margin: 0;
   font-family: "Poppins", sans-serif;
   color: #f0f0f0; /* Light text color */
 }
+
 header {
   background: #333; /* Dark header background */
+  display: flex;
+  justify-content: center;
 }
+
 header .container {
   max-width: 1400px;
-  margin: 0 auto;
+  width: 100%;
   padding: 10px 20px;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
+
+header .logo-container {
+  flex-grow: 1;
+  display: flex;
+}
+
 header a {
   color: #1aac83; /* Green color for links */
   text-decoration: none;
 }
+
+/* Pages */
 .pages {
   max-width: 1400px;
   padding: 20px;
@@ -34,7 +47,7 @@ header a {
   color: #f0f0f0; /* Light text color */
 }
 
-/* homepage */
+/* Homepage */
 .home {
   display: grid;
   grid-template-columns: 3fr 1fr;
@@ -61,16 +74,19 @@ header a {
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
   color: #f0f0f0; /* Light text color */
 }
+
 .workout-details h4 {
   margin: 0 0 10px 0;
   font-size: 1.2em;
   color: var(--primary);
 }
+
 .workout-details p {
   margin: 0;
   font-size: 0.9em;
   color: #a0a0a0; /* Lighter grey for text */
 }
+
 .workout-details span {
   position: absolute;
   top: 20px;
@@ -82,11 +98,13 @@ header a {
   color: #1aac83; /* Green color for span text */
 }
 
-/* new workout form */
-label, input {
+/* New Workout Form */
+label,
+input {
   display: block;
   color: #f0f0f0; /* Light text color */
 }
+
 input {
   padding: 10px;
   margin-top: 10px;
@@ -98,6 +116,7 @@ input {
   color: #f0f0f0; /* Light text color */
   box-sizing: border-box;
 }
+
 form button {
   background: var(--primary);
   border: 0;
@@ -107,6 +126,7 @@ form button {
   border-radius: 4px;
   cursor: pointer;
 }
+
 div.error {
   padding: 10px;
   background: #4a1c1c; /* Dark red background */
@@ -115,16 +135,18 @@ div.error {
   border-radius: 4px;
   margin: 20px 0;
 }
+
 input.error {
   border: 1px solid var(--error);
 }
 
-/* navbar */
-nav {
+/* Navbar */
+header nav {
   display: flex;
   align-items: center;
 }
-nav a, nav button {
+nav a,
+nav button {
   margin-left: 10px;
   color: #1aac83; /* Green color for links and buttons */
 }
@@ -139,8 +161,50 @@ nav button {
   font-size: 1em;
 }
 
-/* auth forms */
-form.signup, form.login {
+/* Dropdown */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+.dropdown-content {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  right: 0;
+  top: 100%;
+  background: #333; /* Dark background for dropdown */
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  min-width: 160px;
+  border-radius: 4px;
+}
+.dropdown-content .dropdown-item {
+  padding: 12px 16px;
+  color: #1aac83; /* Green color for dropdown items */
+  text-align: left;
+  text-decoration: none;
+  display: block;
+  border-bottom: 1px solid #444; /* Divider between items */
+}
+.dropdown-content .dropdown-item:last-child {
+  border-bottom: none; /* Remove divider for last item */
+}
+.dropdown-content .dropdown-item:hover {
+  background-color: #444; /* Darker background on hover */
+}
+.dropdown .button {
+  background: #1c1c1c; /* Dark button background */
+  color: var(--primary);
+  border: 2px solid var(--primary);
+  padding: 6px 10px;
+  border-radius: 4px;
+  font-family: "Poppins", sans-serif;
+  cursor: pointer;
+  font-size: 1em;
+}
+/* Authentication Forms */
+form.signup,
+form.login {
   max-width: 400px;
   margin: 40px auto;
   padding: 20px;
@@ -148,4 +212,3 @@ form.signup, form.login {
   border-radius: 4px;
   color: #f0f0f0; /* Light text color */
 }
-

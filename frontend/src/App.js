@@ -32,10 +32,6 @@ function App() {
               path = '/signup'
               element = {!user ? <Signup /> : <Navigate to={'/'} />}
             />
-            {/* <Route 
-              path="/profile" 
-              element= {user ? <UserProfile memberID={user.id}/> : <Navigate to={'/'} />}
-            /> */}
             <Route 
               path="/profile/:ID" 
               element= {user ? <UserProfile /> : <Navigate to={'/'} />}
@@ -46,7 +42,7 @@ function App() {
             />
             <Route 
               path='/friends'
-              element={user ? <FriendsPage userId={user._id} /> : <Navigate to={'/'} />} // Use FriendsPage correctly
+              element={user ? <FriendsPage userId={user._id} /> : <Navigate to={'/'} />}
             />
           </Routes>
         </div>
