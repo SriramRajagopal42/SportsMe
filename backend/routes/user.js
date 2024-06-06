@@ -9,7 +9,8 @@ const {
     get_filtered_users,
     update_user,
     request_friend,
-    add_friend
+    add_friend,
+    remove_friend
 } = require('../controllers/user_controller')
 const requireAuth = require('../middleware/requireAuth')
 
@@ -41,5 +42,7 @@ router.patch('/friends/request/:id', request_friend)
 
 // Accept a certain user's friend request
 router.patch('/friends/accept/:id', add_friend)
+
+router.patch('/friends/remove/:id', remove_friend)
 
 module.exports = router

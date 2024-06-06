@@ -142,7 +142,6 @@ const request_friend = async(req, res) => {
 const add_friend = async(req, res) => {
     const id = req.params.id;
     const friend_to_add = req.body.friend.friend_id;
-    console.log(friend_to_add);
     if (!mongoose.Types.ObjectId.isValid(id)) {
         return res.status(404).json({error: "No such user"})
     }
@@ -175,20 +174,20 @@ const add_friend = async(req, res) => {
 const remove_friend = async(req, res) => {
     const id = req.params.id;
     const friend_to_remove = req.body.friend.friend_id;
-    console.log(friend_to_add);
+    console.log();
     if (!mongoose.Types.ObjectId.isValid(id)) {
         return res.status(404).json({error: "No such user"})
     }
     try {
 
-        const requester =  await User.findByIdAndUpdate(id, {$pull: {friends: friend_to_add}}, {new : true, runValidators: true});
-        const removed_friend = await User.findByIdAndUpdate(friend_to_add, {$pull: {friends: id}}, {new : true, runValidators: true});
+        const requester =  await User.findByIdAndUpdate(id, {$pull: {friends: friend_to_remove}}, {new : true, runValidators: true});
+        const removed_friend = await User.findByIdAndUpdate(friend_to_remove, {$pull: {friends: id}}, {new : true, runValidators: true});
         // //remove friend from list of friend_requests
         var mailOptions = {
             from: process.env.GMAIL,
             to: requester.email,
             subject: `You removed ${removed_friend.username} `,
-            text: `Hello ${requester.username}, sorry to see you remove ${removed_friend.username} as a friend. We hope you guys settle things out!`
+            text: `Hello ${requester.username}, sorry to see you remove ${removed_friend.username} as a friend. We hope you two settle things out!`
         }
   
         transporter.sendMail(mailOptions)
