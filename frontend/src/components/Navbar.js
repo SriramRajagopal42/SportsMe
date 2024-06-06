@@ -22,17 +22,14 @@ const Navbar = () => {
                     {user && (
                     <div>
                         {/*<span>{user.username}</span>*/}
-                        <Link to ="/">
-                            <button className="button">Current Groups</button>
-                        </Link>
                         <Link to ="/groupslist">
                             <button className="button">Search For Groups</button>
                         </Link>
-                        <Link to ="/profile">
-                            <button className="button">My Profile</button>
-                        </Link>
                         <Link to="/friends">
                             <button className="button">Friends</button>
+                        </Link>
+                        <Link to ="/profile">
+                            <button className="button">My Profile</button>
                         </Link>
                         <button className="button" onClick={handleClick}>Log out</button>
                     </div>
