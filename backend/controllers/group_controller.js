@@ -25,6 +25,20 @@ const get_filtered_groups = async(req, res) => {
     res.status(200).json(groups)
 }
 
+// get inverse of filtered groups
+const get_inverse_filtered_groups = async(req, res) => {
+    const groups = await Group.find({$nor: req.body}).sort({createdAt: -1})
+
+    res.status(200).json(groups)
+}
+
+// get filtered groups, but inverse user
+const get_inverted_user_filtered_groups = async(req, res) => {
+    const groups = await Group.find({$and: [{member_ids: {$not: {$eq: req.user._id}}}, req.body]}).sort({createdAt: -1})
+
+    res.status(200).json(groups)
+}
+
 // get a single group
 const get_group = async(req, res) => {
     const {id} = req.params.id
@@ -257,6 +271,8 @@ const get_all_members = async(req, res) => {
 module.exports = {
     get_all_groups,
     get_filtered_groups,
+    get_inverse_filtered_groups,
+    get_inverted_user_filtered_groups,
     get_group,
     create_group,
     delete_group,
