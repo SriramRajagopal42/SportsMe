@@ -91,7 +91,7 @@ const GroupDetails = ({group}) => {
             <hr />
             <Comments comments={group.comments} group_id={group._id}/>
             {!group.member_ids.includes(user.id) && <button className="join-group-btn" onClick={handleJoin}>Join Group</button>}
-            {group.member_ids.includes(user.id) && !(group.creator_id === user.id) && <button className="leave-group-btn" onClick={handleLeave}>Leave Group</button>}
+            {group.member_ids.includes(user.id) && !(group.creator_id === user.id) && <button className="leave-group-btn" onClick={handleLeave}><strong>Leave Group</strong></button>}
             {group.creator_id === user.id && <span className="material-symbols-outlined" onClick={handleClick}>delete</span>}
         </div>
     )

@@ -29,7 +29,7 @@ const Navbar = () => {
             <div>
               {/* <span>{user.username}</span> */}
               <div className="dropdown">
-                <button className="button" onClick={toggleDropdown}>
+                <button className="menu_container" onClick={toggleDropdown}>
                   Menu
                 </button>
                 {dropdownOpen && (

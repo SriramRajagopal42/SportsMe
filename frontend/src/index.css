@@ -3,7 +3,7 @@
 
 /* Global Styles */
 :root {
-  --primary: #1aac83; /* Primary color */
+  --primary: #31b6ef; /* Primary color */
   --error: #e7195a; /* Error color */
 }
 
@@ -32,10 +32,20 @@ header .container {
 header .logo-container {
   flex-grow: 1;
   display: flex;
+  padding-left: 95px;
+  justify-content: center;
+  font-family: 'Comic Sans MS', cursive, sans-serif;
+
+}
+
+header .menu_container {
+  justify-content: flex-end; /* Push menu to the right */
+  display: flex;
+  flex-grow: 0; /* Prevents menu container from growing */
 }
 
 header a {
-  color: #1aac83; /* Green color for links */
+  color: var(--primary); /* Green color for links */
   text-decoration: none;
 }
 
@@ -165,6 +175,8 @@ nav button {
 .dropdown {
   position: relative;
   display: inline-block;
+  padding-right: 10px;
+
 }
 .dropdown-content {
   display: flex;
