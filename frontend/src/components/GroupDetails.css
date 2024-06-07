@@ -8,6 +8,16 @@
     cursor: pointer;
   }
 
+.delete-group-btn {
+  padding: 6px 12px;
+  font-size: 14px;
+  color: rgb(255, 255, 255);
+  background-color: #be1808;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
   .join-group-btn {
     padding: 6px 12px;
     font-size: 14px;
