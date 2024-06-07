@@ -105,7 +105,7 @@ const FilterBar = ({type}) => {
 
                         <label>Date:</label>
                         <input 
-                            type="text"
+                            type="date"
                             onChange={(e) => setDate(e.target.value)}
                             value={date}
                         />

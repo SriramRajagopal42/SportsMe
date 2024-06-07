@@ -76,7 +76,7 @@ const GroupForm = () => {
 
             <label>Date:</label>
             <input 
-                type="text"
+                type="date"
                 onChange={(e) => setDate(e.target.value)}
                 value={date}
                 className={emptyFields.includes('date') ? 'error' : ''}
