@@ -195,7 +195,7 @@ const UserProfile = () => {
               </div>
               <div className="form-group">
                 <label>
-                  Year:
+                  Skill Level:
                   <select 
                     name="skill_level"
                     value={formData.skill_level}
