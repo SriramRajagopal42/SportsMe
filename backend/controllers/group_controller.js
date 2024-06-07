@@ -196,7 +196,7 @@ const leave_group = async(req, res) => {
             from: process.env.GMAIL,
             to: creator.email,
             subject: 'Group member has left',
-            text: 'Hello ${creator.username}, ${member.username} has left your ${group.sport} group because he hates your fucking guts. Please jump off a cliff!'
+            text: `Hello ${creator.username}, ${member.username} has left your ${group.sport} group.`
             //MAYBE CHANGE THIS LOL
         };
 
