@@ -48,6 +48,7 @@ const GroupDetails = ({group}) => {
 
         if (response.ok) {
             dispatch({type: "UPDATE_GROUP", payload: json})
+            dispatch({type: "DELETE_GROUP", payload: json})
         }
     }
 
@@ -68,6 +69,7 @@ const GroupDetails = ({group}) => {
 
         if (response.ok) {
             dispatch({type: "UPDATE_GROUP", payload: json})
+            dispatch({type: "DELETE_GROUP", payload: json})
         }
     }
 

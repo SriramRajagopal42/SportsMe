@@ -1,6 +1,6 @@
 /* Import Google Font */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;800&family=VT323&display=swap');
-
+/*@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;800&family=VT323&display=swap');
+*/
 /* Global Styles */
 :root {
   --primary: #31b6ef; /* Primary color */
@@ -10,7 +10,7 @@
 body {
   background: #1c1c1c; /* Dark background */
   margin: 0;
-  font-family: "Poppins", sans-serif;
+  font-family: "Helvetica", sans-serif;
   color: #f0f0f0; /* Light text color */
 }
 
@@ -34,7 +34,7 @@ header .logo-container {
   display: flex;
   padding-left: 95px;
   justify-content: center;
-  font-family: 'Comic Sans MS', cursive, sans-serif;
+  font-family: 'Helvetica', cursive, sans-serif;
 
 }
 
@@ -69,7 +69,7 @@ header a {
   border: 0;
   color: #fff;
   padding: 20px;
-  font-family: "Poppins", sans-serif;
+  font-family: "Helvetica", sans-serif;
   border-radius: 4px;
   cursor: pointer;
   font-size: 25px;
@@ -132,7 +132,7 @@ form button {
   border: 0;
   color: #fff;
   padding: 10px;
-  font-family: "Poppins", sans-serif;
+  font-family: "Helvetica", sans-serif;
   border-radius: 4px;
   cursor: pointer;
 }
@@ -166,7 +166,7 @@ nav button {
   border: 2px solid var(--primary);
   padding: 6px 10px;
   border-radius: 4px;
-  font-family: "Poppins", sans-serif;
+  font-family: "Helvetica", sans-serif;
   cursor: pointer;
   font-size: 1em;
 }
@@ -210,7 +210,7 @@ nav button {
   border: 2px solid var(--primary);
   padding: 6px 10px;
   border-radius: 4px;
-  font-family: "Poppins", sans-serif;
+  font-family: "Helvetica", sans-serif;
   cursor: pointer;
   font-size: 1em;
 }
