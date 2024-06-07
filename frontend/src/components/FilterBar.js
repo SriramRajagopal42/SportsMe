@@ -120,7 +120,7 @@ const FilterBar = ({type}) => {
                         <label>Group Size:</label>
                         <input 
                             type="number"
-                            min="1"
+                            min="2"
                             onChange={(e) => setGroupSize(e.target.value)}
                             value={groupSize}
                         />

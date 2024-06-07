@@ -18,7 +18,7 @@ const UserProfile = () => {
     fav_sport: '',
     year: '',
     major: '',
-    height: '60',
+    height: '',
     skill_level: 'Beginner'
   });
 
@@ -221,7 +221,7 @@ const UserProfile = () => {
               <p><strong>Favorite Sport:</strong> {userData.fav_sport}</p>
               <p><strong>Year:</strong> {userData.year}</p>
               <p><strong>Major:</strong> {userData.major}</p>
-              <p><strong>Height:</strong> {formatHeight(userData.height)}</p>
+              <p><strong>Height:</strong> {typeof userData.height === 'string' && formatHeight(userData.height)}</p>
               <p><strong>Skill Level:</strong> {userData.skill_level}</p>
               {ID === user.id && <button onClick={() => setIsEditing(true)}>Edit</button>}
             </div>
