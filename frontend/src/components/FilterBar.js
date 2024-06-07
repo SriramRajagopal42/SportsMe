@@ -112,7 +112,7 @@ const FilterBar = ({type}) => {
 
                         <label>Time:</label>
                         <input 
-                            type="text"
+                            type="time"
                             onChange={(e) => setTime(e.target.value)}
                             value={time}
                         />
