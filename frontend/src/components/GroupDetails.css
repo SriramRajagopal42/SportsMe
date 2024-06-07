@@ -1,8 +1,8 @@
 .leave-group-btn {
   padding: 6px 12px;
   font-size: 14px;
-  color: #f0f0f0; /* Light text color (White) */
-  background-color: #8b0000; /* Dark red background */
+  color: #f0f0f0;
+  background-color: #8b0000; 
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -11,10 +11,23 @@
 .join-group-btn {
   padding: 6px 12px;
   font-size: 14px;
-  color: #f0f0f0; /* Light text color (White) */
-  background-color: green; /* Primary color background (Blue) */
+  color: #f0f0f0; 
+  background-color: green; 
   border: none;
   border-radius: 5px;
   cursor: pointer;
 }
 
+.delete-group-btn {
+  padding: 6px 12px;
+  font-size: 14px;
+  color: #f0f0f0; 
+  background-color: red;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  box-shadow: none;
+  position: absolute;
+  top: 20px;
+  right: 30px;
+}
