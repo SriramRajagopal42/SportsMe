@@ -93,7 +93,7 @@ const GroupForm = () => {
             <label>Group Size:</label>
             <input 
                 type="number"
-                min="1"
+                min="2"
                 onChange={(e) => setGroupSize(e.target.value)}
                 value={groupSize}
                 className={emptyFields.includes('group size') ? 'error' : ''}
