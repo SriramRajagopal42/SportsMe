@@ -8,17 +8,23 @@ import { useNavigate } from 'react-router-dom';
 import GroupDetails from '../components/GroupDetails'
 import GroupForm from '../components/GroupForm'
 import FilterBar from '../components/FilterBar';
+import { useFriendContext } from '../hooks/useFriendsContext';
 
 const Home = () => {
 
     const {groups, dispatch} = useGroupsContext()
     const {user} = useAuthContext()
+    const {friends} = useFriendContext();
 
     const navigate = useNavigate();
 
     const handleClick = () => {
         navigate('/groupslist');
     };
+
+    const countOccurences = (member_arr) => {
+        return member_arr.reduce((count, member) => (friends.includes(member) ? count + 1 : count) ,0)
+    }
 
     useEffect(() => {
         const fetch_groups = async() => {
@@ -37,7 +43,12 @@ const Home = () => {
             const json = await response.json()
 
             if (response.ok) {
-                dispatch({type: 'SET_GROUPS', payload: json})
+                const sorted_groups = [...json].sort((a, b) => {
+                    const countA = countOccurences(a.member_ids);
+                    const countB = countOccurences(b.member_ids);
+                    return countB - countA;
+                  });
+                dispatch({type: 'SET_GROUPS', payload: sorted_groups})
             }
             
 

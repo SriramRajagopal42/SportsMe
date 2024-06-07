@@ -6,17 +6,16 @@ import FriendRequests from './FriendsComponents/FriendRequests';
 import { FriendsContextProvider } from '../context/FriendContext';
 
 
-const FriendsPage = ({ userId }) => {
+const FriendsPage = ({ userId }) => { 
   return (
-    <FriendsContextProvider>
+    // <FriendsContextProvider>
       <div>
         <h1>Friends Page</h1>
         <AddFriend userId={userId} />
-        {/* <RemoveFriend userId={userId} /> */}
         <FriendRequests />
         <FriendsList userId={userId} />
       </div>
-    </FriendsContextProvider>
+    // </FriendsContextProvider>
   );
 };
 

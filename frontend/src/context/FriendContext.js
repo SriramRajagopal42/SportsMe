@@ -49,8 +49,10 @@ export const FriendsContextProvider = ({children}) => {
     
 
     useEffect(()=> {
-        get_users();
-    },[]);
+        if(user) {
+            get_users();
+        }
+    },[user]);
 
     return (
         <FriendsContext.Provider value={contextStuff}>

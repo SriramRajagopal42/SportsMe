@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import axios from 'axios';
 import { useAuthContext } from '../../hooks/useAuthContext';
 import { useFriendContext } from '../../hooks/useFriendsContext';
+import { Link } from 'react-router-dom';
 
 import "./FriendRequests.css";
 
@@ -65,7 +66,7 @@ const FriendRequests = () => {
      {friend_requests.map((friend_request, index) => {
         return (
            <div key={index} className="user-card">
-                <span className="username">{friend_request.username}</span>
+                <span className="username"><Link to={`/profile/${friend_request._id}`} style={{ textDecoration: 'none', color: 'white' }} >  {friend_request.username} </Link></span>
                 <button className="add-friend-btn" onClick={() => {handleAcceptFriendButton(friend_request._id)}}>Accept Friend Request</button>
              </div>
         );
