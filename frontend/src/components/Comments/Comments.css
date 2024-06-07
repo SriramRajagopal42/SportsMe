@@ -10,7 +10,7 @@
 .comment_item {
   margin: 10px 0;
   padding: 10px;
-  border-left: 3px solid #1aac83; /* Green border */
+  border-left: 3px solid var(--primary); /* Primary color border (Blue) */
   background-color: #333; /* Dark background */
   border-radius: 4px;
   color: #f0f0f0; /* Light text color */
@@ -18,7 +18,7 @@
 
 .comment_user {
   margin: 0;
-  color: #1aac83; /* Green color */
+  color: var(--primary); /* Primary color (Blue) */
   font-size: 1.1em;
   font-weight: bold;
 }
@@ -47,13 +47,13 @@
 }
 
 .comment_input:focus {
-  border-color: #1aac83; /* Green border on focus */
+  border-color: var(--primary); /* Primary color border on focus (Blue) */
   outline: none;
 }
 
 .comment_button {
   padding: 8px 16px;
-  background-color: #1aac83; /* Green background */
+  background-color: var(--primary); /* Primary color background (Blue) */
   color: white;
   border: none;
   border-radius: 4px;
@@ -63,12 +63,12 @@
 }
 
 .comment_button:hover {
-  background-color: #159f67; /* Darker green on hover */
+  background-color: #2a93c7; /* Darker blue on hover */
 }
 
 .toggle_button {
   padding: 8px 16px;
-  background-color: #1aac83; /* Green background */
+  background-color: var(--primary); /* Primary color background (Blue) */
   color: white;
   border: none;
   border-radius: 4px;
@@ -79,5 +79,5 @@
 }
 
 .toggle_button:hover {
-  background-color: #159f67; /* Darker green on hover */
+  background-color: #2a93c7; /* Darker blue on hover */
 }

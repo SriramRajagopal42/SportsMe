@@ -3,19 +3,19 @@
 */
 /* Global Styles */
 :root {
-  --primary: #31b6ef; /* Primary color */
-  --error: #e7195a; /* Error color */
+  --primary: #31b6ef; /* Primary color (Blue) */
+  --error: #e7195a; /* Error color (Red) */
 }
 
 body {
-  background: #1c1c1c; /* Dark background */
+  background: #1c1c1c; /* Dark background (Black) */
   margin: 0;
   font-family: "Helvetica", sans-serif;
-  color: #f0f0f0; /* Light text color */
+  color: #f0f0f0; /* Light text color (White) */
 }
 
 header {
-  background: #333; /* Dark header background */
+  background: #333; /* Dark header background (Dark Gray) */
   display: flex;
   justify-content: center;
 }
@@ -35,7 +35,6 @@ header .logo-container {
   padding-left: 95px;
   justify-content: center;
   font-family: 'Helvetica', cursive, sans-serif;
-
 }
 
 header .menu_container {
@@ -45,7 +44,7 @@ header .menu_container {
 }
 
 header a {
-  color: var(--primary); /* Green color for links */
+  color: var(--primary); /* Primary color for links (Blue) */
   text-decoration: none;
 }
 
@@ -54,7 +53,7 @@ header a {
   max-width: 1400px;
   padding: 20px;
   margin: 0 auto;
-  color: #f0f0f0; /* Light text color */
+  color: #f0f0f0; /* Light text color (White) */
 }
 
 /* Homepage */
@@ -65,9 +64,9 @@ header a {
 }
 
 .home-button {
-  background: var(--primary);
+  background: var(--primary); /* Primary background (Blue) */
   border: 0;
-  color: #fff;
+  color: #fff; /* White text */
   padding: 20px;
   font-family: "Helvetica", sans-serif;
   border-radius: 4px;
@@ -76,19 +75,19 @@ header a {
 }
 
 .workout-details {
-  background: #333; /* Dark card background */
+  background: #333; /* Dark card background (Dark Gray) */
   border-radius: 4px;
   margin: 20px auto;
   padding: 20px;
   position: relative;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
-  color: #f0f0f0; /* Light text color */
+  color: #f0f0f0; /* Light text color (White) */
 }
 
 .workout-details h4 {
   margin: 0 0 10px 0;
   font-size: 1.2em;
-  color: var(--primary);
+  color: var(--primary); /* Primary color (Blue) */
 }
 
 .workout-details p {
@@ -102,7 +101,7 @@ header a {
   top: 20px;
   right: 20px;
   cursor: pointer;
-  background: #444; /* Dark background for span */
+  background: #444; /* Dark background for span (Dark Gray) */
   padding: 6px;
   border-radius: 50%;
   color: #1aac83; /* Green color for span text */
@@ -112,7 +111,7 @@ header a {
 label,
 input {
   display: block;
-  color: #f0f0f0; /* Light text color */
+  color: #f0f0f0; /* Light text color (White) */
 }
 
 input {
@@ -120,17 +119,17 @@ input {
   margin-top: 10px;
   margin-bottom: 20px;
   width: 100%;
-  border: 1px solid #555; /* Dark border */
+  border: 1px solid #555; /* Dark border (Dark Gray) */
   border-radius: 4px;
-  background-color: #2a2a2a; /* Dark input background */
-  color: #f0f0f0; /* Light text color */
+  background-color: #2a2a2a; /* Dark input background (Dark Gray) */
+  color: #f0f0f0; /* Light text color (White) */
   box-sizing: border-box;
 }
 
 form button {
-  background: var(--primary);
+  background: var(--primary); /* Primary background (Blue) */
   border: 0;
-  color: #fff;
+  color: #fff; /* White text */
   padding: 10px;
   font-family: "Helvetica", sans-serif;
   border-radius: 4px;
@@ -139,15 +138,15 @@ form button {
 
 div.error {
   padding: 10px;
-  background: #4a1c1c; /* Dark red background */
-  border: 1px solid var(--error);
-  color: var(--error);
+  background: #4a1c1c; /* Dark red background (Dark Red) */
+  border: 1px solid var(--error); /* Error border (Red) */
+  color: var(--error); /* Error text color (Red) */
   border-radius: 4px;
   margin: 20px 0;
 }
 
 input.error {
-  border: 1px solid var(--error);
+  border: 1px solid var(--error); /* Error border (Red) */
 }
 
 /* Navbar */
@@ -155,15 +154,17 @@ header nav {
   display: flex;
   align-items: center;
 }
+
 nav a,
 nav button {
   margin-left: 10px;
   color: #1aac83; /* Green color for links and buttons */
 }
+
 nav button {
-  background: #1c1c1c; /* Dark button background */
-  color: var(--primary);
-  border: 2px solid var(--primary);
+  background: #1c1c1c; /* Dark button background (Black) */
+  color: var(--primary); /* Primary color text (Blue) */
+  border: 2px solid var(--primary); /* Primary border (Blue) */
   padding: 6px 10px;
   border-radius: 4px;
   font-family: "Helvetica", sans-serif;
@@ -176,68 +177,73 @@ nav button {
   position: relative;
   display: inline-block;
   padding-right: 10px;
-
 }
+
 .dropdown-content {
   display: flex;
   flex-direction: column;
   position: absolute;
   right: 0;
   top: 100%;
-  background: #333; /* Dark background for dropdown */
+  background: #333; /* Dark background for dropdown (Dark Gray) */
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
   min-width: 160px;
   border-radius: 4px;
 }
+
 .dropdown-content .dropdown-item {
   padding: 12px 16px;
-  color: #1aac83; /* Green color for dropdown items */
+  color: #31b6ef; /* Green color for dropdown items */
   text-align: left;
   text-decoration: none;
   display: block;
-  border-bottom: 1px solid #444; /* Divider between items */
+  border-bottom: 1px solid #444; /* Divider between items (Dark Gray) */
 }
+
 .dropdown-content .dropdown-item:last-child {
   border-bottom: none; /* Remove divider for last item */
 }
+
 .dropdown-content .dropdown-item:hover {
-  background-color: #444; /* Darker background on hover */
+  background-color: #444; /* Darker background on hover (Dark Gray) */
 }
+
 .dropdown .button {
-  background: #1c1c1c; /* Dark button background */
-  color: var(--primary);
-  border: 2px solid var(--primary);
+  background: #1c1c1c; /* Dark button background (Black) */
+  color: var(--primary); /* Primary color text (Blue) */
+  border: 2px solid var(--primary); /* Primary border (Blue) */
   padding: 6px 10px;
   border-radius: 4px;
   font-family: "Helvetica", sans-serif;
   cursor: pointer;
   font-size: 1em;
 }
+
 /* Authentication Forms */
 form.signup,
 form.login {
   max-width: 400px;
   margin: 40px auto;
   padding: 20px;
-  background: #333; /* Dark form background */
+  background: #333; /* Dark form background (Dark Gray) */
   border-radius: 4px;
-  color: #f0f0f0; /* Light text color */
+  color: #f0f0f0; /* Light text color (White) */
 }
 
-/* Collapsible stuff */
+/* Collapsible content */
 .content {
-  border: 2px solid var(--primary);
+  border: 2px solid var(--primary); /* Primary border (Blue) */
   padding: 10px 20px;
   border-radius: 4px;
 }
-  
+
 .content-parent {
   height: 0px;
   overflow: hidden;
   transition: height ease 0.6s;
 }
-  
+
 .content-show {
   height: 200px;
 }

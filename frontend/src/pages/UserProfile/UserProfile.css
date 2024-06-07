@@ -4,24 +4,24 @@
   padding: 30px;
   border: 1px solid #333;
   border-radius: 10px;
-  background-color: #1c1c1c;
+  background-color: #1c1c1c; /* Dark background */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
   font-family: 'Arial', sans-serif;
-  color: #f0f0f0;
+  color: #f0f0f0; /* Light text color */
 }
 
 .user-profile h2 {
   text-align: center;
   margin-bottom: 30px;
   font-size: 24px;
-  color: #1aac83;
+  color: var(--primary); /* Primary color (Blue) */
 }
 
 .user-profile p {
   font-size: 16px;
   margin: 10px 0;
   line-height: 1.6;
-  color: #a0a0a0;
+  color: #a0a0a0; /* Light grey text */
 }
 
 .user-profile form {
@@ -32,7 +32,7 @@
 
 .user-profile label {
   font-size: 14px;
-  color: #a0a0a0;
+  color: #a0a0a0; /* Light grey text */
   display: flex;
   flex-direction: column;
 }
@@ -41,17 +41,17 @@
 .user-profile select {
   padding: 10px;
   font-size: 14px;
-  border: 1px solid #555;
+  border: 1px solid #555; /* Dark border */
   border-radius: 4px;
-  background-color: #2a2a2a;
-  color: #f0f0f0;
+  background-color: #2a2a2a; /* Dark background */
+  color: #f0f0f0; /* Light text color */
   transition: border-color 0.3s;
   margin-top: 5px;
 }
 
 .user-profile input:focus,
 .user-profile select:focus {
-  border-color: #1aac83;
+  border-color: var(--primary); /* Primary color border on focus (Blue) */
   outline: none;
 }
 
@@ -62,8 +62,8 @@
 .user-profile button {
   padding: 10px 20px;
   font-size: 14px;
-  color: #fff;
-  background-color: #1aac83;
+  color: #fff; /* White text color */
+  background-color: var(--primary); /* Primary color background (Blue) */
   border: none;
   border-radius: 4px;
   cursor: pointer;
@@ -71,7 +71,7 @@
 }
 
 .user-profile button:hover {
-  background-color: #148a67;
+  background-color: #2a93c7; /* Darker blue on hover */
 }
 
 .user-profile .form-actions {
@@ -86,6 +86,5 @@
 .user-profile .height-display {
   margin-left: auto; 
   margin-top: -20px;
-  color: #fff;
+  color: #fff; /* White text color */
 }
-
