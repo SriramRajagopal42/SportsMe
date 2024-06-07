@@ -180,6 +180,17 @@ const UserProfile = () => {
                   </select>
                 </label>
               </div>
+              <div className="form-group">
+                <label>
+                  Major:
+                  <input
+                    type="text"
+                    name="major"
+                    value={formData.major}
+                    onChange={handleInputChange}
+                  />
+                </label>
+              </div>
               <div className="form-group height-slider">
                 <label>
                   Height: <span className="height-display">{formatHeight(formData.height)}</span>
