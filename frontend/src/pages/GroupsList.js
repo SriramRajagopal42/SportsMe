@@ -1,5 +1,5 @@
 import React from 'react';
-import {useEffect,useState} from 'react'
+import {useEffect/*, useState*/} from 'react'
 import {useGroupsContext} from '../hooks/useGroupsContext'
 import {useAuthContext} from '../hooks/useAuthContext'
 
@@ -14,13 +14,14 @@ const GroupsList = () => {
     const {groups, dispatch} = useGroupsContext()
     const {user} = useAuthContext()
     const {friends} = useFriendContext();
-    const [ordered_groups, setOrderedGroups] = useState([]);
-
-    const countOccurences = (member_arr) => {
-        return member_arr.reduce((count, member) => (friends.includes(member) ? count + 1 : count) ,0)
-    }
+    //const [ordered_groups, setOrderedGroups] = useState([]);
 
     useEffect(() => {
+
+        const countOccurences = (member_arr) => {
+            return member_arr.reduce((count, member) => (friends.includes(member) ? count + 1 : count) ,0)
+        }
+
         const fetch_groups = async() => {
             const response = await fetch('http://localhost:4000/api/groups/filtered/inverse_user', {
                 method: 'POST',
@@ -47,7 +48,7 @@ const GroupsList = () => {
         if (user) {
             fetch_groups()
         }
-    }, [dispatch, user])
+    }, [dispatch, user, friends])
 
     return (
         <div className="home">

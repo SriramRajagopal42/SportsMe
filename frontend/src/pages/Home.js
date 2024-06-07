@@ -22,12 +22,12 @@ const Home = () => {
         navigate('/groupslist');
     };
 
-    const countOccurences = (member_arr) => {
-        return member_arr.reduce((count, member) => (friends.includes(member) ? count + 1 : count) ,0)
-    }
-
     useEffect(() => {
         const fetch_groups = async() => {
+
+            const countOccurences = (member_arr) => {
+                return member_arr.reduce((count, member) => (friends.includes(member) ? count + 1 : count) ,0)
+            }
             
             const response = await fetch('http://localhost:4000/api/groups/filtered', {
                 method: 'POST',
@@ -57,7 +57,7 @@ const Home = () => {
         if (user) {
             fetch_groups()
         }
-    }, [dispatch, user])
+    }, [dispatch, user, friends])
 
     
     return (

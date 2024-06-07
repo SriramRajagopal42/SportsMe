@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React/*, { useEffect }*/ from 'react';
 import axios from 'axios';
 import "./Friends.css";
 import { useFriendContext } from '../../hooks/useFriendsContext';
