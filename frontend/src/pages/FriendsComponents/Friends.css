@@ -1,56 +1,55 @@
-/* AddFriend.css */
 .user-list {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    padding: 20px;
-    margin: auto;
-    max-width: 600px;
-    border: 1px solid #333;
-    border-radius: 10px;
-    background-color: #1c1c1c;
-  }
-  
-  .user-card {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px;
-    background-color: #2a2a2a;
-    border: 1px solid #333;
-    border-radius: 8px;
-    transition: background-color 0.3s ease;
-  }
-  
-  .user-card:hover {
-    background-color: #333;
-  }
-  
-  .username {
-    font-size: 16px;
-    color: #1aac83;
-  }
-  
-  .add-friend-btn {
-    padding: 6px 12px;
-    font-size: 14px;
-    color: white;
-    background-color: #1aac83;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .add-friend-btn:hover {
-    background-color: #148a67;
-  }
-  
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px;
+  margin: auto;
+  max-width: 600px;
+  border: 1px solid #333;
+  border-radius: 10px;
+  background-color: #1c1c1c; /* Dark background */
+}
+
+.user-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  background-color: #2a2a2a; /* Slightly lighter dark background */
+  border: 1px solid #333;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+.user-card:hover {
+  background-color: #333; /* Darker background on hover */
+}
+
+.username {
+  font-size: 16px;
+  color: var(--primary); /* Primary color (Blue) */
+}
+
+.add-friend-btn {
+  padding: 6px 12px;
+  font-size: 14px;
+  color: white;
+  background-color: var(--primary); /* Primary color background (Blue) */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.add-friend-btn:hover {
+  background-color: #2a93c7; /* Darker blue on hover */
+}
+
 .remove-friend-btn {
   padding: 6px 12px;
   font-size: 14px;
-  color: rgb(3, 0, 0);
-  background-color: #be1808;
+  color: #f0f0f0; /* Light text color (White) */
+  background-color: #8b0000; /* Dark red background */
   border: none;
   border-radius: 5px;
   cursor: pointer;

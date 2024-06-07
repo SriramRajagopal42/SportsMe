@@ -1,29 +1,20 @@
 .leave-group-btn {
-    padding: 6px 12px;
-    font-size: 14px;
-    color: rgb(3, 0, 0);
-    background-color: #be1808;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-
-.delete-group-btn {
   padding: 6px 12px;
   font-size: 14px;
-  color: rgb(255, 255, 255);
-  background-color: #be1808;
+  color: #f0f0f0; /* Light text color (White) */
+  background-color: #8b0000; /* Dark red background */
   border: none;
   border-radius: 5px;
   cursor: pointer;
 }
 
-  .join-group-btn {
-    padding: 6px 12px;
-    font-size: 14px;
-    color: rgb(3, 0, 0);
-    background-color: #08be45;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
+.join-group-btn {
+  padding: 6px 12px;
+  font-size: 14px;
+  color: #f0f0f0; /* Light text color (White) */
+  background-color: green; /* Primary color background (Blue) */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
