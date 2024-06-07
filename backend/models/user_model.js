@@ -46,7 +46,7 @@ const user_schema = new Schema({
         type: String,
     },
     height: {
-        type: Number,
+        type: String,
     },
     skill_level: {
         type: String,
