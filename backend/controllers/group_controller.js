@@ -13,30 +13,55 @@ var transporter = nodemailer.createTransport({
 
 // get all groups
 const get_all_groups = async(req, res) => {
-    const groups = await Group.find({}).sort({createdAt: -1})
+    try {
+        const groups = await Group.find({}).sort({createdAt: -1})
+        res.status(200).json(groups)
+    }
+    catch (error) {
+        console.log(error);
+        res.status(400).json({error: error.message})
+    }
+    
 
-    res.status(200).json(groups)
+    
 }
 
 // get filtered groups
 const get_filtered_groups = async(req, res) => {
-    const groups = await Group.find(req.body).sort({createdAt: -1})
-
-    res.status(200).json(groups)
+    try {
+        const groups = await Group.find(req.body).sort({createdAt: -1})
+        res.status(200).json(groups)
+    }
+    catch (error) {
+        console.log(error);
+        res.status(400).json({error: error.message})
+    }
+    
 }
 
 // get inverse of filtered groups
 const get_inverse_filtered_groups = async(req, res) => {
-    const groups = await Group.find({$nor: req.body}).sort({createdAt: -1})
-
-    res.status(200).json(groups)
+    try {
+        const groups = await Group.find({$nor: req.body}).sort({createdAt: -1})
+        res.status(200).json(groups)
+    }
+    catch (error) {
+        console.log(error);
+        res.status(400).json({error: error.message})
+    }
 }
 
 // get filtered groups, but inverse user
 const get_inverted_user_filtered_groups = async(req, res) => {
-    const groups = await Group.find({$and: [{member_ids: {$not: {$eq: req.user._id}}}, req.body]}).sort({createdAt: -1})
+    try {
+        const groups = await Group.find({$and: [{member_ids: {$not: {$eq: req.user._id}}}, req.body]}).sort({createdAt: -1})
 
-    res.status(200).json(groups)
+        res.status(200).json(groups)
+    }
+    catch (error) {
+        console.log(error);
+        res.status(400).json({error: error.message})
+    }
 }
 
 // get a single group
@@ -47,13 +72,23 @@ const get_group = async(req, res) => {
         return res.status(404).json({error: "No such group"})
     }
 
-    const group = await Group.findById(id)
+    
+    try {
+        const group = await Group.findById(id)
 
-    if (!group) {
-        return res.status(404).json({error: "No such group"})
+        if (!group) {
+            return res.status(404).json({error: "No such group"})
+        }
+        res.status(200).json(group)
+    }
+    catch (error) {
+        console.log(error);
+        res.status(400).json({error: error.message})
     }
 
-    res.status(200).json(group)
+    
+
+    
 }
 
 // create new group
@@ -103,13 +138,20 @@ const delete_group = async(req, res) => {
         return res.status(404).json({error: "No such group"})
     }
 
-    const group = await Group.findOneAndDelete({_id: id, creator_id})
 
-    if (!group) {
-        return res.status(404).json({error: "Not the user who created the group"})
+    try {
+        const group = await Group.findOneAndDelete({_id: id, creator_id})
+
+        if (!group) {
+            return res.status(404).json({error: "Not the user who created the group"})
+        }
+
+        res.status(200).json(group)
     }
-
-    res.status(200).json(group)
+    catch (error) {
+        console.log(error);
+        res.status(400).json({error: error.message})
+    }
 }
 
 // join a group
@@ -122,42 +164,52 @@ const join_group = async(req, res) => {
     }
 
 
-    const group_size = await Group.findById(id).select('group_size')
-    const user = await User.findById(member_id)
-    console.log(user.username)
 
-
-    const group = await Group.findOneAndUpdate({_id: id}, {
-        $push: {
-            member_ids: {
-                $each: [member_id],
-                $slice: group_size.group_size
-            },
-            usernames: {
-                $each: [user.username],
-                $slice: group_size.group_size
+    try {
+        const group_size = await Group.findById(id).select('group_size')
+        const user = await User.findById(member_id)
+        console.log(user.username)
+    
+    
+        const group = await Group.findOneAndUpdate({_id: id}, {
+            $push: {
+                member_ids: {
+                    $each: [member_id],
+                    $slice: group_size.group_size
+                },
+                usernames: {
+                    $each: [user.username],
+                    $slice: group_size.group_size
+                }
             }
+        }, { new: true })
+    
+        if (!group) {
+            return res.status(404).json({error: "No such group"})
         }
-    }, { new: true })
-
-    if (!group) {
-        return res.status(404).json({error: "No such group"})
+    
+     
+        const creator = await User.findById(group.creator_id)
+        const member = await User.findById(member_id)
+    
+        var mailOptions = {
+            from: process.env.GMAIL,
+            to: creator.email,
+            subject: 'New group member!',
+            text: `Hello ${creator.username}, ${member.username} just joined your ${group.sport} group, say hello!`
+        }
+    
+        transporter.sendMail(mailOptions)
+    
+        
+    
+    
+        res.status(200).json(group)
     }
-
- 
-    const creator = await User.findById(group.creator_id)
-    const member = await User.findById(member_id)
-
-    var mailOptions = {
-        from: process.env.GMAIL,
-        to: creator.email,
-        subject: 'New group member!',
-        text: `Hello ${creator.username}, ${member.username} just joined your ${group.sport} group, say hello!`
+    catch (error) {
+        console.log(error);
+        res.status(400).json({error: error.message})
     }
-
-    transporter.sendMail(mailOptions)
-
-    res.status(200).json(group)
 
 }
 
@@ -171,38 +223,44 @@ const leave_group = async(req, res) => {
         return res.status(404).json({error: "No such group"});
     }
 
-    const group = await Group.findOneAndUpdate({_id: id}, {
-        $pull: {
-            member_ids: member_id,
-            usernames: (await User.findById(member_id)).username
+    try {
+        const group = await Group.findOneAndUpdate({_id: id}, {
+            $pull: {
+                member_ids: member_id,
+                usernames: (await User.findById(member_id)).username
+            }
+        }, { new: true });
+    
+        if (!group) {
+            return res.status(404).json({error: "No such group"});
         }
-    }, { new: true });
-
-    if (!group) {
-        return res.status(404).json({error: "No such group"});
+    
+        if (group.member_ids.length === 0) {
+            // Delete the group if it's empty
+            await Group.deleteOne({_id: id});
+    
+            res.status(200).json({message: "Group deleted as it has no more members"});
+        } else {
+    
+            const creator = await User.findById(group.creator_id);
+            const member = await User.findById(member_id);
+    
+            var mailOptions = {
+                from: process.env.GMAIL,
+                to: creator.email,
+                subject: 'Group member has left',
+                text: `Hello ${creator.username}, ${member.username} has left your ${group.sport} group.`
+                //MAYBE CHANGE THIS LOL
+            };
+    
+            transporter.sendMail(mailOptions);
+    
+            res.status(200).json(group);
+        }
     }
-
-    if (group.member_ids.length === 0) {
-        // Delete the group if it's empty
-        await Group.deleteOne({_id: id});
-
-        res.status(200).json({message: "Group deleted as it has no more members"});
-    } else {
-
-        const creator = await User.findById(group.creator_id);
-        const member = await User.findById(member_id);
-
-        var mailOptions = {
-            from: process.env.GMAIL,
-            to: creator.email,
-            subject: 'Group member has left',
-            text: `Hello ${creator.username}, ${member.username} has left your ${group.sport} group.`
-            //MAYBE CHANGE THIS LOL
-        };
-
-        transporter.sendMail(mailOptions);
-
-        res.status(200).json(group);
+    catch (error) {
+        console.log(error);
+        res.status(400).json({error: error.message})
     }
 }
 
@@ -216,15 +274,23 @@ const update_group = async(req, res) => {
         return res.status(404).json({error: "No such group"})
     }
 
-    const group = await Group.findOneAndUpdate({_id: id, creator_id}, {
-        ...req.body
-    }, {new: true, runValidators: true})
 
-    if (!group) {
-        return res.status(404).json({error: "Not the user who created the group"})
+
+    try {
+        const group = await Group.findOneAndUpdate({_id: id, creator_id}, {
+            ...req.body
+        }, {new: true, runValidators: true})
+    
+        if (!group) {
+            return res.status(404).json({error: "Not the user who created the group"})
+        }
+    
+        res.status(200).json(group)
     }
-
-    res.status(200).json(group)
+    catch (error) {
+        console.log(error);
+        res.status(400).json({error: error.message})
+    }
 }
 
 const update_comments = async(req, res) => {
@@ -253,19 +319,26 @@ const get_all_members = async(req, res) => {
         return res.status(404).json({error: "No such group"});
     }
 
-    const ids = await Group.findById(id).select('member_ids')
 
-    if (!ids) {
-        return res.status(404).json({error: "No such group"})
+    try {
+        const ids = await Group.findById(id).select('member_ids')
+
+        if (!ids) {
+            return res.status(404).json({error: "No such group"})
+        }
+    
+        const users = await User.find({ '_id': { $in: ids } })
+    
+        if (!users) {
+            return res.status(404).json({error: "At least one of the users is invalid"})
+        }
+    
+        res.status(200).json(users)
     }
-
-    const users = await User.find({ '_id': { $in: ids } })
-
-    if (!users) {
-        return res.status(404).json({error: "At least one of the users is invalid"})
+    catch (error) {
+        console.log(error);
+        res.status(400).json({error: error.message})
     }
-
-    res.status(200).json(users)
 }
 
 module.exports = {
