@@ -19,7 +19,7 @@ const UserProfile = () => {
     year: '',
     major: '',
     height: '',
-    skill_level: 'Beginner'
+    skill_level: ''
   });
 
   useEffect(() => {
