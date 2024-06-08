@@ -77,6 +77,6 @@ npm start
 The frontend will be available on http://localhost:3000, which should appear in your browser automatically.  
 
 ## Authors  
-SportsMe was created by Savio Joseph, Arnav Kushwah, Sriram Rajagopal, Sailesh Gunaseelan, and Pranav Akella as a project for CS35L  
+The app SportsMe was created by Savio Joseph, Arnav Kushwah, Sriram Rajagopal, Sailesh Gunaseelan, and Pranav Akella as a project for CS35L.
 
 
