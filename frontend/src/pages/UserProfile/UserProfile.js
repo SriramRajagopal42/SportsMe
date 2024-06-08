@@ -44,7 +44,7 @@ const UserProfile = () => {
             fav_sport: data.fav_sport || '',
             year: data.year || '',
             major: data.major || '',
-            height: data.height || '60',
+            height: data.height || '',
             skill_level: data.skill_level || ''
           });
         } catch (err) {
